@@ -2,38 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="description" content="">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Patrick Day Online Resume">
-    <meta name="generator" content="Hugo 0.79.0">
-    <title>Patrick Day Resume</title>
+    <title>Patrick D. Day</title>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+   <style>
+.bd-placeholder-img {
+     font-size: 1.125rem;
+     text-anchor: middle;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     user-select: none;
+   }
+   @media (min-width: 768px) {
+.bd-placeholder-img-lg {
+      font-size: 3.5rem;
+     }
+   }
+.bd-placeholder-img {
+     font-size: 1.125rem;
+     text-anchor: middle;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     user-select: none;
+   }
 
       @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+.bd-placeholder-img-lg {
+       font-size: 3.5rem;
+     }
+   }
 .modal-full {
     min-width: 100%;
     margin-left: 80;
@@ -48,17 +46,17 @@
     min-height: 90%;
 }
 iframe {
-		margin-top: 0px;
-		margin-bottom: 0px;
-		margin-right:5px;
-		margin-left:5px;			
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		 border-radius: 0px;
-		-moz-box-shadow: 2px 2px 6px #000;
-		-webkit-box-shadow: 2px 2px 6px #000;
-		box-shadow: 2px 2px 6px #000;
-		filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
+	margin-top: -20px;
+	margin-bottom: 0px;
+	margin-right:5px;
+	margin-left:5px;			
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	 border-radius: 0px;
+	-moz-box-shadow: 0px 0px 0px #000;
+	-webkit-box-shadow: 0px 0px 0px #000;
+	box-shadow: 0px 0px 0px #000;
+	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
 }
 
 .box{
@@ -83,18 +81,99 @@ xmp {
     min-height: 500vh;
 	font-family: inherit; 
 }
+      /* Your existing styles here */
     </style>
-    <link href="navbar-top-fixed.css" rel="stylesheet">
+    <script>
+// Function to control access level checkAuth.php:
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('checkAuth.php')
+    .then(response => response.json())
+    .then(result => {
+  if (result.success) {
+    sessionStorage.setItem('accessLevel', result.accessLevel);
+    checkAccessLevel(result.accessLevel);
+    } else {
+    sessionStorage.removeItem('accessLevel');
+    checkAccessLevel('view');
+    }
+  });
+});
+      function checkAccessLevel(accessLevel) {
+        const addUpdateButton = document.querySelector('#addUpdateButton');
+        const logoutButton = document.querySelector('#logoutButton');
+        const loginButton = document.querySelector('#loginButton');
+        
+        if (accessLevel === 'admin') {
+          addUpdateButton.style.display = 'block';
+        } else {
+          addUpdateButton.style.display = 'none';
+        }
+
+        // Show logout button and hide login button if logged in
+        if (accessLevel !== 'view') {
+          logoutButton.style.display = 'block';
+          loginButton.style.display = 'none';
+        } else {
+          logoutButton.style.display = 'none';
+          loginButton.style.display = 'block';
+        }
+      }
+
+      // Simulate fetching access level from server (replace with actual server response)
+      document.addEventListener('DOMContentLoaded', () => {
+        const accessLevel = sessionStorage.getItem('accessLevel') || 'view'; // Example: 'admin' or 'view'
+        checkAccessLevel(accessLevel);
+      });
+
+      // Handle login via AJAX
+      async function handleLogin(event) {
+        event.preventDefault(); // Prevent full-page reload
+
+        const loginId = document.querySelector('#login_id').value;
+        const loginPword = document.querySelector('#login_pword').value;
+
+        try {
+          const response = await fetch('authenticate.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ login_id: loginId, login_pword: loginPword }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            sessionStorage.setItem('accessLevel', result.accessLevel); // Store access level
+            checkAccessLevel(result.accessLevel); // Update UI dynamically
+            document.querySelector('#loginModal .btn-close').click(); // Close the modal
+            alert('Login successful!');
+          } else {
+            alert('Login failed: ' + result.message);
+          }
+        } catch (error) {
+          alert('An error occurred: ' + error.message);
+        }
+      }
+
+      // Logout function
+      function handleLogout() {
+        sessionStorage.removeItem('accessLevel'); // Remove access level from session
+        checkAccessLevel('view'); // Reset the UI to show login button
+        alert('Logged out successfully!');
+      }
+
+    </script>
   </head>
   <body>
     <main>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()"><img src="images/DDAYLOGO.gif" height="70">Work History:</a>
+          <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()"><img src="images/DDAYLOGO.gif" height="70">Patrick Day:</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbar">
+          <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
              <li class="nav-item">
                 <a class="nav-link" href="byid.php?company_id=4" id="HarmonyTech" target="nav">HarmonyTech</a>
@@ -130,15 +209,20 @@ xmp {
               <li class="nav-item">
                 <a class="nav-link" href="byid.php?company_id=1" id="Cirrus Logic" target="nav">Cirrus Logic</a>
               </li>
-	 </ul>	
-	   <div class="ms-auto">
-		<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal">Add/Update</button>
-              </div>
-	</div>
-    	</div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-  </nav>
-</main>
+            </ul>
+            <button id="addUpdateButton" type="button" class="btn btn-secondary ms-auto" data-bs-toggle="modal" data-bs-target="#modal" style="display: none;">
+              Add/Update
+            </button>
+            <!-- Login and Logout buttons -->
+            <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
+              Login
+            </button>
+            <button type="button" class="btn btn-danger ms-2" id="logoutButton" style="display: none;" onclick="handleLogout()">
+              Logout
+            </button>
+          </div>
+        </div>
+      </nav>
 
 <div class="modal fade bd-example-modal-xl" id="modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
@@ -153,12 +237,12 @@ xmp {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" onclick="updateIframe('companies.php')">Companies</button>
         <button type="button" class="btn btn-secondary" onclick="updateIframe('jobs.php')">Jobs</button>
+  	<button type="button" class="btn btn-secondary" onclick="updateIframe('skills.php')">Skills</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-
 <script>
   // Function to update the iframe src dynamically
   function updateIframe(src) {
@@ -166,114 +250,70 @@ xmp {
   }
 </script>
 
-    </div>
-</div>
-</div>
-</div>
- </div>
-<script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-
-        $("#exampleModal").click(function() {
-                var IP= document.getElementById("IP");
-                var app= document.getElementById("App");
-                var cmafapp = document.getElementById("Cmafapp");
-                var repeatapp = document.getElementById("Repeatapp");
-                var cmafrepeater = document.getElementById("Cmafrepeater");
-                                document.getElementById("serverIP").innerHTML = localStorage.IP;
-                                document.getElementById("app").innerHTML = localStorage.app;
-                                document.getElementById("cmafapp").innerHTML = localStorage.cmafapp;
-                                document.getElementById("repeatapp").innerHTML = localStorage.repeatapp;
-                                document.getElementById("cmafrepeater").innerHTML = localStorage.cmafrepeater;
-
-                                localStorage.setItem("IP", IP.value);
-                                localStorage.setItem("app", app.value);
-                                localStorage.setItem("cmafapp", cmafapp.value);
-                                localStorage.setItem("repeatapp", repeatapp.value);
-                                localStorage.setItem("cmafrepeater", cmafrepeater.value);
-
-                        <!--$("#exampleModal").toggle();                -->
-                                console.log("IP: " + localStorage.getItem("IP"));
-                                console.log("App: " + localStorage.getItem("app"));
-                                console.log("cmaf app: " + localStorage.getItem("cmafapp"));
-                                console.log("repeater app: " + localStorage.getItem("repeatapp"));
-                                console.log("cmaf repeater: " + localStorage.getItem("cmafrepeater"));
-        });
-
-         function store(){
-                var IP= document.getElementById("IP");
-                var app= document.getElementById("App");
-                var cmafapp = document.getElementById("Cmafapp");
-                var repeatapp = document.getElementById("Repeatapp");
-                var cmafrepeater = document.getElementById("Cmafrepeater");
-
-
-                localStorage.setItem("IP", IP.value);
-                localStorage.setItem("App", app.value);
-                localStorage.setItem("Cmafapp", cmafapp.value);
-                localStorage.setItem("Repeatapp", repeatapp.value);
-                localStorage.setItem("Cmafrepeater", cmafrepeater.value);
-
-
-                document.getElementById("serverIP").innerHTML = localStorage.IP;
-                document.getElementById("app").innerHTML = localStorage.app;
-                document.getElementById("cmafapp").innerHTML = localStorage.Cmafapp;
-                document.getElementById("repeatapp").innerHTML = localStorage.repeatapp;
-                document.getElementById("cmafrepeater").innerHTML = localStorage.cmafrepeater;
-
-
-                $("#exampleModal").toggle();
-                                console.log("IP: " + localStorage.getItem("IP"));
-                                console.log("App: " + localStorage.getItem("app"));
-                                console.log("cmaf app: " + localStorage.getItem("cmafapp"));
-                                console.log("repeater app: " + localStorage.getItem("repeatapp"));
-                                console.log("cmaf repeater: " + localStorage.getItem("cmafrepeater"));
-                };
-
-function refreshPage() {
-        location.reload("nav");
-}
-function refreshsite() {
-location.reload(parent);
-}
-function home() {
-$("#nav").load(parent)
-}
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- Login Modal -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="loginForm">
+                <div class="mb-3">
+                  <label for="login_id" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="login_id" name="login_id" required>
+                </div>
+                <div class="mb-3">
+                  <label for="login_pword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="login_pword" name="login_pword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
         </div>
-      </nav>
+      </div>
+      <div class="w-100 p-3" id="nav-space">
+        <br><br>
+        <iframe id="nav" src="base.htm" width="100%" height="100%" scrolling="no" onload="resizeIframe(this)"></iframe>
+      </div>
+
+      <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script>
+        document.querySelectorAll('navmodal a').forEach(link => {
+          link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const iframe = document.getElementById('navmodal');
+            iframe.src = this.href;
+          });
+        });
+
+        // Resize iframe to fit content dynamically
+        function resizeIframe(iframe) {
+          iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        }
+
+        // Attach event listeners to navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+          link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const iframe = document.getElementById('nav');
+            iframe.src = this.href;
+          });
+        });
+	function refreshPage() {
+        	location.reload("nav");
+	}
+	function refreshsite() {
+	location.reload(parent);
+	}
+	function home() {
+	$("#nav").load(parent)
+	}
+        // Attach event listener to login form
+        document.querySelector('#loginForm').addEventListener('submit', handleLogin);
+      </script>
     </main>
-
-    <div class="w-100 p-3" id="nav-space">
-<br><br>
-      <!-- Set the default page in the `src` attribute -->
-      <iframe id="nav" src="base.htm" width="100%" height="100%" scrolling="no" onload="resizeIframe(this)"></iframe>
-    </div>
-
-    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.querySelectorAll('navmodal a').forEach(link => {
-        link.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent default navigation
-          const iframe = document.getElementById('navmodal'); // Target iframe
-          iframe.src = this.href; // Set the iframe's src to the link's href
-        });
-      });
-      // Resize iframe to fit content dynamically
-      function resizeIframe(iframe) {
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-      }
-
-      // Attach event listeners to navigation links
-      document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function(event) {
-          event.preventDefault(); // Prevent default navigation
-          const iframe = document.getElementById('nav'); // Target iframe
-          iframe.src = this.href; // Set the iframe's src to the link's href
-        });
-      });
-    </script>
   </body>
 </html>

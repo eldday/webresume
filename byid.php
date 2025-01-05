@@ -64,6 +64,7 @@ if ($company_id && is_numeric($company_id)) {
     <style>
         body {
             font-family: Arial, sans-serif;
+	    margin-top: 20px;
             margin: 20px;
         }
         .container {
@@ -105,7 +106,7 @@ if ($company_id && is_numeric($company_id)) {
     </style>
 </head>
 <body>
-<br><br>
+<br><br><br><br>
     <div class="container">
         <!-- Company info and logo column -->
         <div class="company-info">

@@ -1,4 +1,30 @@
 <?php
+session_start();
+if (isset($_SESSION['accessLevel'])) {
+echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
+}
+// Define session timeout duration (e.g., 30 minutes)
+$timeoutDuration = 1800; // 30 minutes in seconds
+
+// Check if "lastActivity" is set in the session
+if (isset($_SESSION['lastActivity'])) {
+    // Calculate the session's lifetime
+    $elapsedTime = time() - $_SESSION['lastActivity'];
+
+    // If the session has expired
+    if ($elapsedTime > $timeoutDuration) {
+        // Unset all session variables
+        session_unset();
+
+        // Destroy the session
+        session_destroy();
+
+        exit();
+    }
+}
+
+// Update "lastActivity" to the current timestamp
+$_SESSION['lastActivity'] = time();
 // Configuration for the database connection
 $host = "$IP";
 $dbname = "resume";
