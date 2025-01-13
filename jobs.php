@@ -1,48 +1,22 @@
 <?php
+
+
+require_once 'db_connection.php';
+
 session_start();
-if (isset($_SESSION['accessLevel'])) {
-echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
-}
-// Define session timeout duration (e.g., 30 minutes)
-$timeoutDuration = 1800; // 30 minutes in seconds
 
-// Check if "lastActivity" is set in the session
-if (isset($_SESSION['lastActivity'])) {
-    // Calculate the session's lifetime
-    $elapsedTime = time() - $_SESSION['lastActivity'];
-
-    // If the session has expired
-    if ($elapsedTime > $timeoutDuration) {
-        // Unset all session variables
-        session_unset();
-
-        // Destroy the session
-        session_destroy();
-
-        exit();
-    }
-}
-
-// Update "lastActivity" to the current timestamp
-$_SESSION['lastActivity'] = time();
-// Configuration for the database connection
-$host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
-
-// Connect to the database
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+// Deny access if not admin
+if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
+    http_response_code(403);
+    echo "Access Denied!";
+ 
+   exit();
 }
 
 // Fetch all records for the job list
 $records = [];
 try {
-    $stmt = $pdo->query("SELECT job_id, job_title FROM Job_history");
+    $stmt = $pdo->query("SELECT job_id, job_title FROM Job_history ORDER BY start_date DESC");
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error fetching job records: " . $e->getMessage());

@@ -1,39 +1,15 @@
 <?php
 session_start();
+// Deny access if not admin
+if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
+    http_response_code(403);
+    echo "Access Denied!";
 
-// Define session timeout duration (e.g., 30 minutes)
-$timeoutDuration = 1800; // 30 minutes in seconds
-
-// Check if "lastActivity" is set in the session
-if (isset($_SESSION['lastActivity'])) {
-    // Calculate the session's lifetime
-    $elapsedTime = time() - $_SESSION['lastActivity'];
-
-    // If the session has expired
-    if ($elapsedTime > $timeoutDuration) {
-        session_unset();
-        session_destroy();
-        exit(json_encode(['success' => false, 'message' => 'Session expired.']));
-    }
+   exit();
 }
 
-// Update "lastActivity" to the current timestamp
-$_SESSION['lastActivity'] = time();
 
-// Configuration for the database connection
-$host = "localhost"; // Replace with your actual host
-$dbname = "resume"; // Replace with your actual database name
-$username = "pday"; // Replace with your actual database username
-$password = "quality"; // Replace with your actual database password
-
-// Connect to the database
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
+require_once 'db_connection.php';
 // Fetch all skills
 $skills = [];
 try {
@@ -135,6 +111,7 @@ if (isset($_POST['add_category'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Skills and Categories</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <style>
         body {
             display: flex;
@@ -209,5 +186,12 @@ if (isset($_POST['add_category'])) {
         <p><?= htmlspecialchars($message); ?></p>
     <?php endif; ?>
 </div>
+//    <script>
+ //       ClassicEditor
+  //          .create(document.querySelector('#Skill_name'))
+   //         .catch(error => {
+    //            console.error(error);
+     //       });
+    //</script>
 </body>
 </html>

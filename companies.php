@@ -1,49 +1,20 @@
 <?php
 session_start();
-session_start();
-if (isset($_SESSION['accessLevel'])) {
-echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
-}
-// Define session timeout duration (e.g., 30 minutes)
-$timeoutDuration = 1800; // 30 minutes in seconds
 
-// Check if "lastActivity" is set in the session
-if (isset($_SESSION['lastActivity'])) {
-    // Calculate the session's lifetime
-    $elapsedTime = time() - $_SESSION['lastActivity'];
-
-    // If the session has expired
-    if ($elapsedTime > $timeoutDuration) {
-        // Unset all session variables
-        session_unset();
-
-        // Destroy the session
-        session_destroy();
-
-        exit();
-    }
+// Deny access if not admin
+if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
+    http_response_code(403);
+    echo "Access Denied!";
+ 
+   exit();
 }
 
-// Update "lastActivity" to the current timestamp
-$_SESSION['lastActivity'] = time();
-// Configuration for the database connection
-$host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
-
-// Connect to the database
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
+require_once 'db_connection.php';
 
 // Fetch all records for the list
 $records = [];
 try {
-    $stmt = $pdo->query("SELECT company_id, company_name FROM companies");
+    $stmt = $pdo->query(" SELECT DISTINCT c.company_name, c.company_id FROM companies c INNER JOIN Job_history j ON c.company_id = j.company_id ORDER BY end_date DESC;");
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error fetching records: " . $e->getMessage());
@@ -131,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <title>companies</title>
     <style>
         body {
@@ -212,6 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Save</button>
         </form>
     </div>
+ <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 </html>
 
