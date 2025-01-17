@@ -52,6 +52,9 @@ A set of PHP scripts that automatically build and present an interactive resume 
 * *[PHP](https://www.php.net/downloads.php)*
 * *[Apache Server](https://httpd.apache.org/)*
 
+
+# What it does
+
 ---
 * The entire site is a dynamically loading set of scripts that makes calls to the database to query for information and present it in an interactive website
 * The horizontat top menu builds your company history from newest to oldest (Left to right) clicking on these menu objects loads your job history in the page below it
