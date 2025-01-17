@@ -53,12 +53,12 @@ A set of PHP scripts that automatically build and present an interactive resume 
 * *[Apache Server](https://httpd.apache.org/)*
 
 ---
-The entire site is a dynamically loading set of scripts that makes calls to the database to query for information and present it in an interactive website
-The horizontat top menu builds your company history from newest to oldest (Left to right) clicking on these menu objects loads your job history in the page below it
-The company specific pages show your job history at that company and are listed by most recent positions first vertically 
-The company logo is displayed to the left of your job history and is a link to a modal that presents the company description information
-The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
-If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the following:
+#The entire site is a dynamically loading set of scripts that makes calls to the database to query for information and present it in an interactive website
+#The horizontat top menu builds your company history from newest to oldest (Left to right) clicking on these menu objects loads your job history in the page below it
+#The company specific pages show your job history at that company and are listed by most recent positions first vertically 
+#The company logo is displayed to the left of your job history and is a link to a modal that presents the company description information
+#The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
+#If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the following:
 
 ## 1. **Company information** 
 **Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
