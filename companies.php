@@ -5,8 +5,7 @@ session_start();
 if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
     http_response_code(403);
     echo "Access Denied!";
- 
-   exit();
+    exit();
 }
 
 require_once 'db_connection.php';
@@ -14,7 +13,7 @@ require_once 'db_connection.php';
 // Fetch all records for the list
 $records = [];
 try {
-    $stmt = $pdo->query(" SELECT DISTINCT c.company_name, c.company_id FROM companies c INNER JOIN Job_history j ON c.company_id = j.company_id ORDER BY end_date DESC;");
+    $stmt = $pdo->query("SELECT DISTINCT c.company_name, c.company_id FROM companies c INNER JOIN Job_history j ON c.company_id = j.company_id ORDER BY end_date DESC;");
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error fetching records: " . $e->getMessage());
@@ -39,6 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $company_id = $_POST['company_id'] ?? null;
     $company_name = $_POST['company_name'] ?? "";
     $description = $_POST['description'] ?? "";
+    if (empty($description)) {
+        $message = "Description cannot be empty.";
+    }
     $logo = $record['logo'] ?? ""; // Existing logo filename
 
     // Handle file upload if a new logo is provided
@@ -102,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <title>companies</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <title>Companies</title>
     <style>
         body {
             display: flex;
@@ -138,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="list">
-        <h2>companies</h2>
+        <h2>Companies</h2>
         <ul>
             <?php foreach ($records as $recordItem): ?>
                 <li>
@@ -173,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 value="<?php echo htmlspecialchars($record['company_name'] ?? ''); ?>" required>
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" required><?php echo htmlspecialchars($record['Description'] ?? ''); ?></textarea>
+            <textarea id="description" name="description"><?php echo htmlspecialchars($record['Description'] ?? ''); ?></textarea>
 
             <label for="logo">Logo:</label>
             <?php if (!empty($record['logo'])): ?>
@@ -184,13 +186,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Save</button>
         </form>
     </div>
- <script>
+
+    <script>
         ClassicEditor
             .create(document.querySelector('#description'))
+            .then(editor => {
+                editor.setData(<?php echo json_encode($record['Description'] ?? ''); ?>);
+
+                document.querySelector('form').addEventListener('submit', () => {
+                    document.querySelector('#description').value = editor.getData();
+                });
+            })
             .catch(error => {
                 console.error(error);
             });
     </script>
 </body>
 </html>
-
