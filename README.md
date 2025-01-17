@@ -58,6 +58,20 @@ If they held more than one role, additional entries can be made associated with 
 * *[Apache Server](https://httpd.apache.org/)*
 
 ---
+## 6. **What it does** 
+**can be deployed to a public facing server** Once all the components are in place : 
+* Linux Server running Debian
+* update the db_connection script to match your datbabase installation 
+* public ip or domain name record
+* running mysql or maria database
+* at least one admin account defined in the User_accounts table with admin access
+* run the hasher script to encrpt passwords in the database
+
+The server will present and empty framework including:
+* Black horizontal (top) Navigation bar with a single button ::LOGIN::
+* An empty white main page with nothing shown
+
+
 
 
 ---
