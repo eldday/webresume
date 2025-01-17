@@ -7,7 +7,7 @@ A set of PHP scripts that automatically build and present an interactive resume 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
 ## 3. **Skill Categories** 
 **Add/Update Categories.** This allows grouping of soft and hard skills by category for use on the home page of the generated site 
-## 4. **Skills** hfx
+## 4. **Skills** 
 **Add/Update Skills.** This includes indicating the category the skill should be associated with.
 ## 5. **Account Management** 
 **Add/Update Users.** This includes User name , Password, and Access Level.
