@@ -37,9 +37,7 @@ If they held more than one role, additional entries can be made associated with 
 	$ git clone git@github.com:eldday/webresume.git
 ```
 
----
-
-### Execution
+### Configuration
 
 > Access project root
 
@@ -49,18 +47,11 @@ If they held more than one role, additional entries can be made associated with 
 > Seed the Database
 ---
 
-
 ---
 ## Technologies:
 - PHP
 - Javascript
 - HTML
-
-## Patterns
-- Fluent Page Object
-- PageFactory
-
----
 
 ### Dependencies
 * *[PHP](https://www.php.net/downloads.php)*
