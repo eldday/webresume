@@ -1,5 +1,5 @@
 # RESUME BUILDING WEB APPLICATION
-A set of PHP scripts that automatically build and present an interactive resume that has the following capabilities:
+A set of PHP scripts that automatically build and present an interactive resume.
 
 
 # What it does
