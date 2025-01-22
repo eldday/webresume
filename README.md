@@ -11,14 +11,6 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The company logo is displayed to the left of your job history and is a link to a modal that presents the company description information
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the following:
-* 
-![Unauthenticated view ](images/unauthenticated_login.png)
-
-![Authenticated view ](images/authenticated_login.png)
-
-![Admin Modal](images/admin-modal.png)
-
-![Unauthenticated view ](images/profile-admin-modal.png)
 
 ### 1. **Company information** 
 **Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
@@ -38,7 +30,19 @@ If they held more than one role, additional entries can be made associated with 
 ### 6. **Profile**
 **Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the datbabase. These values can be updated in the admin console modal. 
  
+## Unauthenticated Access 
+ 
+![Unauthenticated view ](images/unauthenticated_login.png)
 
+## Authenticated login with Administrator level credentials
+
+![Authenticated view ](images/authenticated_login.png)
+
+## Administrator Modal 
+![Admin Modal](images/admin-modal.png)
+
+## Edit/Update Profile via the Administrator modal
+![Update Profile in Modal](images/profile-admin-modal.png)
 
 
 ---
