@@ -78,13 +78,14 @@ If they held more than one role, additional entries can be made associated with 
 ``` ```
 
 > Seed the database 
+
 ``` mysql create database webresume ```
 ``` mysql -u [user name] -p [targer db name] < [dumpfile.sql] ```
-```INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password.$accessLevel);```
 
 > at least one admin account defined in the User_accounts table with admin access
-
-
+```
+INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password.$accessLevel);
+```
 > run the hasher script to encrpt the intitial admin password in the database
 
 
