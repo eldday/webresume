@@ -70,19 +70,24 @@ If they held more than one role, additional entries can be made associated with 
 
 > Access project root
 
----
-cd /sourcedir
---- 
- 
+
+``` cd /sourcedir  ```
 > Linux Server running Debian
-
+``` ``` 
 > update the db_connection script to match your database installation
+``` ```
 
-> running mysql or maria database
-
+> Seed the database 
+``` mysql create database webresume ```
+``` mysql -u [user name] -p [targer db name] < [dumpfile.sql] ```
+ 
+```INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password.$accessLevel);
+```
 > at least one admin account defined in the User_accounts table with admin access
 
-> run the hasher script to encrpt passwords in the database
+
+> run the hasher script to encrpt the intitial admin password in the database
+
 
 ---
 
