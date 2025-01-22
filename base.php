@@ -89,18 +89,18 @@ try {
             padding: 0;
 	    }
 		/* Header Section */
-	header {
-	    position: relative;
-	    height: 230px; /* Adjust as needed */
-	    background-image: url('images/shoes.png'); /* Replace with your image file */
-	    background-size: cover;
-	    background-position: left;
-	    display: flex;
-	    align-items: left;
-	    justify-content: center;
-	    color: white;
-	    overflow: hidden;
-	}
+header {
+    position: relative;
+    height: 230px; /* Adjust as needed */
+    background-image: url('images/<?php echo htmlspecialchars($profile['bg_image']); ?>'); /* Dynamic background */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
 
 	header::before {
 	    content: '';
