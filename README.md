@@ -70,13 +70,17 @@ If they held more than one role, additional entries can be made associated with 
 
 > Access project root
 
-
 ``` cd /sourcedir  ```
-> Linux Server running Debian
-``` ``` 
-> update the db_connection script to match your database installation
-``` ```
 
+> Linux Server running Debian
+> update the db_connection script to match your database installation
+```
+Replace the empty variables for:
+IP,
+Database Name
+mysql Username
+mysql Password
+```
 > Seed the database 
 
 ``` mysql create database webresume ```
@@ -88,7 +92,10 @@ If they held more than one role, additional entries can be made associated with 
 INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password.$accessLevel);
 ```
 > run the hasher script to encrpt the intitial admin password in the database
-
+```
+cd utilities
+./hasher.php [enter]
+```
 
 ---
 
