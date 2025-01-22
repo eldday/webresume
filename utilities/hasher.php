@@ -1,9 +1,9 @@
 <?php
 // Database connection details
 $host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
+$dbname = "";
+$username = "";
+$password = "";
 
 try {
     // Establish database connection

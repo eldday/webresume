@@ -70,19 +70,20 @@ If they held more than one role, additional entries can be made associated with 
 
 > Access project root
 
+---
+cd /sourcedir
+--- 
+ 
 > Linux Server running Debian
 
-> update the db_connection script to match your datbabase installation
+> update the db_connection script to match your database installation
 
 > running mysql or maria database
 
 > at least one admin account defined in the User_accounts table with admin access
 
 > run the hasher script to encrpt passwords in the database
-```
-	$ cd /webresume
-```
-> Seed the Database
+
 ---
 
 ---

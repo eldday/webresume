@@ -1,8 +1,8 @@
 <?php
 $host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
+$dbname = "";
+$username = "";
+$password = "";
 
 // Connect to the database
 try {
