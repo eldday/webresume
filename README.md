@@ -28,7 +28,7 @@ If they held more than one role, additional entries can be made associated with 
 ### 5. **Account Management** 
 **Add/Update Users.** This includes User name , Password, and Access Level.
 ### 6. **Profile**
-**Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the datbabase. These values can be updated in the admin console modal. 
+**Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
  
 ## Unauthenticated Access 
  
