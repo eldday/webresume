@@ -80,6 +80,7 @@ If they held more than one role, additional entries can be made associated with 
 > Seed the database 
 
 ``` mysql create database webresume ```
+
 ``` mysql -u [user name] -p [targer db name] < [dumpfile.sql] ```
 
 > at least one admin account defined in the User_accounts table with admin access
