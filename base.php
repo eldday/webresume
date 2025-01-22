@@ -24,6 +24,22 @@ if (isset($_SESSION['lastActivity'])) {
 }
 require_once 'db_connection.php'; // Ensure db_connection.php sets $pdo
 
+// Fetch profile information
+try {
+    $stmt = $pdo->prepare("SELECT * from profile");
+    $stmt->execute();
+    $profile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$profile) {
+        throw new Exception("Profile information not found.");
+    }
+} catch (PDOException $e) {
+    die("Error fetching profile: " . $e->getMessage());
+} catch (Exception $e) {
+    die($e->getMessage());
+}
+
+
 // Fetch all categories and their associated skills
 try {
     $stmt = $pdo->prepare("
@@ -283,11 +299,11 @@ try {
 <header>
     <div class="content">
 	<br><br><br>
-        <h1>Patrick D Day</h1>
-        <p>Career Quality Assurance Professional with 30 years’ experience.</p>
-	<a class="link" href="https://linkedin.com/in/eldday" target="_blank"><img src="images/linkedin_white_28dp.png" width="32" height="32"></a>
-        <a class="link" href="https://github.com/eldday" target="_blank"><img src="images/github_white_28dp.png" width="32" height="32"></a>
-  	<a class="link" href="mailto:pday@ddayzed.com" target="_blank"><img src="images/email_white_28dp.png" width="32" height="32"></a>    
+        <h1><?php echo htmlspecialchars($profile['profile_name']); ?></h1>
+	<p><?php echo htmlspecialchars($profile['profile_description']); ?></p><br>
+        <a class="link" href="<?php echo htmlspecialchars($profile['linkedin_url']); ?>" target="_blank"><img src="images/linkedin_white_28dp.png" width="32" height="32"></a>
+        <a class="link" href="<?php echo htmlspecialchars($profile['github_url']); ?>" target="_blank"><img src="images/github_white_28dp.png" width="32" height="32"></a>
+        <a class="link" href="mailto:<?php echo htmlspecialchars($profile['email']); ?>" target="_blank"><img src="images/email_white_28dp.png" width="32" height="32"></a>
     </div>
 </header>
     <div class="container">

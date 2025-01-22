@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['accessLevel'])) {
-echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
+//echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
 }
 // Define session timeout duration (e.g., 30 minutes)
 $timeoutDuration = 1800; // 30 minutes in seconds
@@ -24,6 +24,21 @@ if (isset($_SESSION['lastActivity'])) {
 }
 // Include your database connection script
 require_once 'db_connection.php';
+
+// Fetch profile information
+try {
+    $stmt = $pdo->prepare("SELECT * from profile");
+    $stmt->execute();
+    $profile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$profile) {
+        throw new Exception("Profile information not found.");
+    }
+} catch (PDOException $e) {
+    die("Error fetching profile: " . $e->getMessage());
+} catch (Exception $e) {
+    die($e->getMessage());
+}
 
 // Fetch company names
 try {
@@ -158,7 +173,7 @@ function handleLogout() {
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()">
-            <img src="images/DDAYLOGO.gif" height="70">Patrick Day:
+            <img src="images/DDAYLOGO.gif" height="70"><?php echo htmlspecialchars($profile['profile_name']); ?> 
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -202,7 +217,8 @@ function handleLogout() {
               <iframe id="navmodal" src="info.htm" width="100%" height="450" frameborder="0"></iframe>
             </div>
             <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Users</button>
+              <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Users</button>
+	      <button type="button" class="btn btn-secondary" onclick="updateIframe('profiles.php')">Profile</button>	
               <button type="button" class="btn btn-secondary" onclick="updateIframe('companies.php')">Companies</button>
               <button type="button" class="btn btn-secondary" onclick="updateIframe('jobs.php')">Jobs</button>
               <button type="button" class="btn btn-secondary" onclick="updateIframe('skills.php')">Skills</button>
