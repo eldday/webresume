@@ -12,6 +12,9 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the following:
 
+## Administrator Modal
+![Admin Modal](images/example_admin_modal_view.png)
+
 ### 1. **Company information** 
 **Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
 
@@ -53,9 +56,6 @@ If they held more than one role, additional entries can be made associated with 
 
 ![Authenticated view ](images/example_default_view.png)
 
-## Administrator Modal 
-![Admin Modal](images/example_admin_modal_view.png)
-
 ---
 
 ## How to use:
@@ -94,7 +94,7 @@ mysql Password
 
 ``` mysql create database webresume ```
 
-``` mysql -u [user name] -p [targer db name] < [dumpfile.sql] ```
+``` mysql -u [user name] -p [targer db name] < webresume.sql ```
 
 > at least one admin account defined in the User_accounts table with admin access
 ```
