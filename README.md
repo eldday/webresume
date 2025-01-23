@@ -47,7 +47,7 @@ If they held more than one role, additional entries can be made associated with 
 
 ## Unauthenticated Access 
  
-![Unauthenticated view ](images/example_test_project.png)
+![Unauthenticated view ](images/example_default_page.png)
 
 ## Authenticated login with Administrator level credentials
 
