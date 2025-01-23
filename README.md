@@ -39,11 +39,11 @@ If they held more than one role, additional entries can be made associated with 
 
 ## Unauthenticated Access 
  
-![Unauthenticated view ](images/example_unathenticated_modal_view.png)
+![Unauthenticated view ](images/example_default_view.png)
 
 ## Authenticated login with Administrator level credentials
 
-![Authenticated view ](images/example_default_view.png)
+![Authenticated view ](images/example_test_project.png)
 
 ## Administrator Modal 
 ![Admin Modal](images/example_admin_modal_view.png)
