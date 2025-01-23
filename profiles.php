@@ -13,7 +13,7 @@ require_once 'db_connection.php';
 // Fetch all records for the list
 $records = [];
 try {
-    $stmt = $pdo->query("SELECT * FROM resume.profile;");
+    $stmt = $pdo->query("SELECT * FROM profile;");
     $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error fetching records: " . htmlspecialchars($e->getMessage()));
@@ -194,6 +194,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	    <label for="website_url">Website URL:</label>
 	    <textarea id="website_url" name="website_url"><?php echo htmlspecialchars($record['website_url'] ?? ''); ?></textarea>
+
+            <label for="email_address">Email Address:</label>
+            <textarea id="email_address" name="email_address"><?php echo htmlspecialchars($record['email_address'] ?? ''); ?></textarea>
 
             <label for="bg_image">Background Image:</label>
             <?php if (!empty($record['bg_image'])): ?>

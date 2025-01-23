@@ -303,7 +303,8 @@ header {
 	<p><?php echo htmlspecialchars($profile['profile_description']); ?></p><br>
         <a class="link" href="<?php echo htmlspecialchars($profile['linkedin_url']); ?>" target="_blank"><img src="images/linkedin_white_28dp.png" width="32" height="32"></a>
         <a class="link" href="<?php echo htmlspecialchars($profile['github_url']); ?>" target="_blank"><img src="images/github_white_28dp.png" width="32" height="32"></a>
-        <a class="link" href="mailto:<?php echo htmlspecialchars($profile['email']); ?>" target="_blank"><img src="images/email_white_28dp.png" width="32" height="32"></a>
+        <a class="link" href="mailto:<?php echo htmlspecialchars($profile['email_address']); ?>" target="_blank"><img src="images/email_white_28dp.png" width="32" height="32"></a>
+	<a class="link" href="<?php echo htmlspecialchars($profile['website_url']); ?>" target="_blank"><img src="images/link_white_28dp.png" width="32" height="32"></a>
     </div>
 </header>
     <div class="container">
