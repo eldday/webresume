@@ -111,7 +111,7 @@ cd utilities
 sudo service apache2 start
 sudo service mysql start
 ```
->Verify you can get to the website from your browser using any conigured domain name, local IP Address, or Localhost
+>Verify you can get to the website from your browser using: http(s)://domain name, http(s)://local IP Address, or http(s)://Localhost
 
 ---
 
