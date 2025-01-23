@@ -14,40 +14,41 @@ A set of PHP scripts that automatically build and present an interactive resume.
 
 ### 1. **Company information** 
 **Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
+![Authenticated view ](images/example_companies_modal_view.png)
 
 ### 2. **Job History information** 
 **Add/Update jobs.** This includes the title of the position they held, the start and end dates, and an html formatted description of the role. 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
+![Authenticated view ](images/example_jobs_modal_view.png)
 
 ### 3. **Skill Categories** 
 **Add/Update Categories.** This allows grouping of soft and hard skills by category for use on the home page of the generated site 
 
+
 ### 4. **Skills** 
 **Add/Update Skills.** This includes indicating the category the skill should be associated with.
+![Example Skills Modal](images/example_skills_modal_view.png)
 
 ### 5. **Account Management** 
 **Add/Update Users.** This includes User name , Password, and Access Level.
+
+
 ### 6. **Profile**
 **Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
- 
+![Update Profile in Modal](images/example_profile_modal_view.png) 
+
 ## Unauthenticated Access 
  
-![Unauthenticated view ](images/unauthenticated_login.png)
+![Unauthenticated view ](images/example_unathenticated_modal_view.png)
 
 ## Authenticated login with Administrator level credentials
 
-![Authenticated view ](images/authenticated_login.png)
+![Authenticated view ](images/example_default_view.png)
 
 ## Administrator Modal 
-![Admin Modal](images/admin-modal.png)
-
-## Edit/Update Profile via the Administrator modal
-![Update Profile in Modal](images/profile-admin-modal.png)
-
+![Admin Modal](images/example_admin_modal_view.png)
 
 ---
-
-
 
 ## How to use:
 
