@@ -14,11 +14,15 @@ A set of PHP scripts that automatically build and present an interactive resume.
 
 ### 1. **Company information** 
 **Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
+
+## Companies Tab in Admin Modal
 ![Authenticated view ](images/example_companies_modal_view.png)
 
 ### 2. **Job History information** 
 **Add/Update jobs.** This includes the title of the position they held, the start and end dates, and an html formatted description of the role. 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
+
+## Jobs Tab in Admin Modal
 ![Authenticated view ](images/example_jobs_modal_view.png)
 
 ### 3. **Skill Categories** 
@@ -27,6 +31,8 @@ If they held more than one role, additional entries can be made associated with 
 
 ### 4. **Skills** 
 **Add/Update Skills.** This includes indicating the category the skill should be associated with.
+
+## Skills tab in Admin Modal
 ![Example Skills Modal](images/example_skills_modal_view.png)
 
 ### 5. **Account Management** 
@@ -35,15 +41,17 @@ If they held more than one role, additional entries can be made associated with 
 
 ### 6. **Profile**
 **Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
+
+## Profle tab in Admin Modal
 ![Update Profile in Modal](images/example_profile_modal_view.png) 
 
 ## Unauthenticated Access 
  
-![Unauthenticated view ](images/example_default_view.png)
+![Unauthenticated view ](images/example_test_project.png)
 
 ## Authenticated login with Administrator level credentials
 
-![Authenticated view ](images/example_test_project.png)
+![Authenticated view ](images/example_default_view.png)
 
 ## Administrator Modal 
 ![Admin Modal](images/example_admin_modal_view.png)
