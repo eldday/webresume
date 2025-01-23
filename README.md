@@ -85,7 +85,7 @@ If they held more than one role, additional entries can be made associated with 
 > update the db_connection script to match your database installation
 ```
 Replace the empty variables for:
-IP,
+IP
 Database Name
 mysql Username
 mysql Password
@@ -98,13 +98,20 @@ mysql Password
 
 > at least one admin account defined in the User_accounts table with admin access
 ```
-INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password.$accessLevel);
+INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password, $accessLevel);
 ```
 > run the hasher script to encrpt the intitial admin password in the database
 ```
 cd utilities
 ./hasher.php [enter]
 ```
+
+> Start the Apache2 and MySQL services 
+``` 
+sudo service apache2 start
+sudo service mysql start
+```
+>Verify you can get to the website from your browser using any conigured domain name, local IP Address, or Localhost
 
 ---
 
