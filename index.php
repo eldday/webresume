@@ -61,7 +61,7 @@ try {
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Patrick D. Day</title>
+    <title><?php echo htmlspecialchars($profile['profile_name']); ?></title>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
       /* Your existing styles here */
@@ -127,8 +127,8 @@ try {
       async function handleLogin(event) {
         event.preventDefault(); // Prevent full-page reload
 
-        const loginId = document.querySelector('#login_id').value;
-        const loginPword = document.querySelector('#login_pword').value;
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
 
         try {
           const response = await fetch('authenticate.php', {
@@ -136,7 +136,7 @@ try {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: new URLSearchParams({ login_id: loginId, login_pword: loginPword }),
+            body: new URLSearchParams({ username: username, password: password }),
           });
 
           const result = await response.json();
@@ -245,12 +245,12 @@ function handleLogout() {
             <div class="modal-body">
               <form id="loginForm">
                 <div class="mb-3">
-                  <label for="login_id" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="login_id" name="login_id" required>
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
-                  <label for="login_pword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="login_pword" name="login_pword" required>
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
               </form>
