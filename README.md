@@ -85,31 +85,41 @@ If they held more than one role, additional entries can be made associated with 
 > update the db_connection script to match your database installation
 ```
 Replace the empty variables for:
-IP
-Database Name
-mysql Username
-mysql Password
+
+ 	IP
+	Database Name
+	mysql Username
+	mysql Password
 ```
 > Seed the database 
+The included backup of the database has the following:
+* example profile
+* example company
+* example job
+* example categories
+* example skills
+* Default User accounts {Admin:Password}
 
+this is enough to show present the main menu and allow navigation 
+ 
 ``` mysql create database webresume ```
 
 ``` mysql -u [user name] -p [targer db name] < webresume.sql ```
 
 > at least one admin account defined in the User_accounts table with admin access
 ```
-INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password, $accessLevel);
+	INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password, $accessLevel);
 ```
 > run the hasher script to encrpt the intitial admin password in the database
 ```
-cd utilities
-./hasher.php [enter]
+	cd utilities
+	./hasher.php [enter]
 ```
 
 > Start the Apache2 and MySQL services 
 ``` 
-sudo service apache2 start
-sudo service mysql start
+	sudo service apache2 start
+	sudo service mysql start
 ```
 >Verify you can get to the website from your browser using: http(s)://domain name, http(s)://local IP Address, or http(s)://Localhost
 
