@@ -86,10 +86,10 @@ If they held more than one role, additional entries can be made associated with 
 ```
 Replace the empty variables for:
 
- 	IP
-	Database Name
-	mysql Username
-	mysql Password
+ 	Host
+	DB Name
+	Username
+	Password
 ```
 > Seed the database 
 The included backup of the database has the following:
