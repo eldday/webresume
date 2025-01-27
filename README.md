@@ -101,10 +101,13 @@ change the following section to show index.php first
 
 > For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
 
-* [Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)
-* [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
-* [Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
-* [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
+[Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)
+
+[Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
+
+[Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
+
+[CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
 
 > Access project root
 
