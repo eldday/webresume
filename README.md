@@ -93,6 +93,7 @@ Replace the empty variables for:
 ```
 > Seed the database 
 The included backup of the database has the following:
+
 * example profile
 * example company
 * example job
@@ -100,7 +101,7 @@ The included backup of the database has the following:
 * example skills
 * Default User accounts {Admin:Password}
 
-this is enough to show present the main menu and allow navigation 
+...this is enough to show the main menu and allow navigation 
  
 ``` mysql create database webresume ```
 
@@ -121,7 +122,11 @@ this is enough to show present the main menu and allow navigation
 	sudo service apache2 start
 	sudo service mysql start
 ```
->Verify you can get to the website from your browser using: http(s)://domain name, http(s)://local IP Address, or http(s)://Localhost
+> Verify you can get to the website from your browser using: 
+
+* http(s)://domain name, 
+* http(s)://local IP Address 
+* http(s)://Localhost
 
 ---
 
