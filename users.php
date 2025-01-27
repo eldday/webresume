@@ -27,7 +27,7 @@ $selectedUser = null;
 
 // If a user is selected from the sidebar, fetch their details
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['select_user'])) {
-    $id = $_POST['user_id'] ?? null;
+    $id = $_POST['id'] ?? null;
 
     if ($id) {
         try {
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['select_user'])) {
 
 // Handle form submission for creating/updating a user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['select_user'])) {
-    $id = $_POST['user_id'] ?? null;
+    $id = $_POST['id'] ?? null;
     $username = $_POST['username'] ?? null;
     $password = $_POST['password'] ?? '';
     $access_level = $_POST['access_level'] ?? null;
@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['select_user'])) {
             <?php foreach ($users as $user): ?>
                 <li>
                     <form action="" method="post" style="display: inline;">
-                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                        <input type="hidden" name="uid" value="<?php echo $user['id']; ?>">
                         <button type="submit" name="select_user"><?php echo htmlspecialchars($user['username']); ?></button>
                     </form>
                 </li>
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['select_user'])) {
         <?php endif; ?>
 
         <form action="" method="post">
-            <input type="hidden" name="user_id" value="<?php echo $selectedUser['id'] ?? ''; ?>">
+            <input type="hidden" name="id" value="<?php echo $selectedUser['id'] ?? ''; ?>">
 
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($selectedUser['username'] ?? ''); ?>" required><br><br>

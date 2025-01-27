@@ -276,7 +276,8 @@ function handleLogout() {
 
         // Resize iframe to fit content dynamically
         function resizeIframe(iframe) {
-          iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+	  iframe.style.height = '100vh'; 
+          //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
         }
 
         // Attach event listeners to navigation links
