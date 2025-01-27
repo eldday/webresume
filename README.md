@@ -88,6 +88,20 @@ The initial base.php page and the top menu both get information from the profile
 
 ### Configuration
 
+> For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
+
+---
+
+* [Debian Apache PHP MariaDB Install](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10/)
+
+* [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
+
+* [Fedora LAMP Installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
+
+* [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
+
+---
+
 #### Debin Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
@@ -105,16 +119,6 @@ change the following section to show index.php first
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
 ```
-
-> For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
-
-* [Debian Apache PHP MariaDB Install](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10/)
-
-* [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
-
-* [Fedora LAMP Installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
-
-* [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
 
 > Access project root
 
