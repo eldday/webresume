@@ -9,7 +9,7 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
 }
 
 
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 // Fetch all skills
 $skills = [];
 try {

@@ -12,7 +12,7 @@
 //} catch (PDOException $e) {
 //    die("Database connection failed: " . $e->getMessage());
 //}
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 // Fetch category details and Skills if a category ID is provided
 $category_id = $_GET['category_id'] ?? null;
 $category_name = '';

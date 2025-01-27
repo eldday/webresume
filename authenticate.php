@@ -24,7 +24,7 @@ if (isset($_SESSION['lastActivity'])) {
 // Update the last activity timestamp
 $_SESSION['lastActivity'] = time();
 
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 header('Content-Type: application/json');
 
 // Handle login form submission

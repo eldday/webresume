@@ -23,7 +23,7 @@ if (isset($_SESSION['lastActivity'])) {
     }
 }
 // Include your database connection script
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 
 // Fetch profile information
 try {

@@ -22,7 +22,7 @@ if (isset($_SESSION['lastActivity'])) {
         exit();
     }
 }
-require_once 'db_connection.php'; // Ensure db_connection.php sets $pdo
+require_once 'utilities/db_connection.php'; // Ensure utilities/db_connection.php sets $pdo
 
 // Fetch profile information
 try {

@@ -11,7 +11,7 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
 
 
 // Include database connection
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 
 $message = '';
 $users = [];

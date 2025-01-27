@@ -14,18 +14,18 @@ try {
 }
 
 // Fetch all user accounts
-$stmt = $pdo->query("SELECT user_id, login_pword FROM `user-accounts`");
+$stmt = $pdo->query("SELECT id, password FROM `users`");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($users as $user) {
-    $userId = $user['user_id'];
-    $plainPassword = $user['login_pword']; // Assuming currently stored as plain text
+    $userId = $user['id'];
+    $plainPassword = $user['password']; // Assuming currently stored as plain text
 
     // Hash the password
     $hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
     // Update the user record with the hashed password
-    $updateStmt = $pdo->prepare("UPDATE `user-accounts` SET login_pword = :hashedPassword WHERE user_id = :userId");
+    $updateStmt = $pdo->prepare("UPDATE `users` SET password = :hashedPassword WHERE id = :userId");
     $updateStmt->execute([':hashedPassword' => $hashedPassword, ':userId' => $userId]);
 }
 

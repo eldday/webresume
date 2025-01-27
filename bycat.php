@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connection.php'; // Ensure db_connection.php sets $pdo
+require_once 'utilities/db_connection.php'; // Ensure utilities/db_connection.php sets $pdo
 
 // Fetch category details and skills if a category ID is provided
 $category_id = $_GET['category_id'] ?? null;

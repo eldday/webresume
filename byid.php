@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 
 // Fetch company details and jobs if a company ID is provided
 $company_id = $_GET['company_id'] ?? null;

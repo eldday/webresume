@@ -9,7 +9,7 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
    exit();
 }
 
-require_once 'db_connection.php';
+require_once 'utilities/utilities/db_connection.php';
 
 $message = '';
 $users = [];

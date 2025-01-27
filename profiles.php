@@ -8,7 +8,7 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
     exit();
 }
 
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 
 // Fetch all records for the list
 $records = [];

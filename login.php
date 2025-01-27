@@ -3,7 +3,7 @@
 session_start();
 
 // Include database connection file
-require_once 'db_connection.php';
+require_once 'utilities/db_connection.php';
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
