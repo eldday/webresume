@@ -12,9 +12,6 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.:
 
-# Admin Modal
-The main interface to add all resume details is the Admin modal, which has buttons in the modal footer that allow input for the following:
-
 
 ## Unauthenticated Access
 
@@ -23,6 +20,10 @@ The main interface to add all resume details is the Admin modal, which has butto
 ## Authenticated login with Administrator level credentials
 
 ![Authenticated view ](images/example_default_view.png)
+
+# Admin Modal
+The main interface to add all resume details is the Admin modal, which has buttons in the modal footer that allow input for the following:
+
 
 ## Administrator Modal
 ![Admin Modal](images/example_admin_modal_view.png)
