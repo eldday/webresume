@@ -10,7 +10,11 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The company specific pages show your job history at that company and are listed by most recent positions first vertically 
 * The company logo is displayed to the left of your job history and is a link to a modal that presents the company description information
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
-* If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the following:
+* If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.:
+
+# Admin Modal
+The main interface to add all resume details is the Admin modal, which has buttons in the modal footer that allow input for the following:
+
 
 ## Unauthenticated Access
 
