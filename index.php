@@ -266,6 +266,8 @@ function handleLogout() {
 
       <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
       <script>
+	// navigation modal 
+
          document.querySelectorAll('navmodal a').forEach(link => {
           link.addEventListener('click', function(event) {
             event.preventDefault();
@@ -275,10 +277,12 @@ function handleLogout() {
         });
 
         // Resize iframe to fit content dynamically
-        function resizeIframe(iframe) {
-	  iframe.style.height = '100vh'; 
-          //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-        }
+
+	function resizeIframe(iframe) {
+    	const contentHeight = iframe.contentWindow.document.body.scrollHeight; // Get the content height
+    	const viewportHeight = window.innerHeight; // Get the viewport height
+    	iframe.style.height = Math.max(contentHeight, viewportHeight) + 'px'; // Use the larger value
+		}
 
         // Attach event listeners to navigation links
         document.querySelectorAll('nav a').forEach(link => {
