@@ -93,17 +93,18 @@ sudo apt install mariadb-server
 sudo apt install php libapache2-mod-php php-mysql
 sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
-chane the following section to show index.php first
+change the following section to show index.php first
+
 ```<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
-</IfModule>
-```
+</IfModule>```
+
 > For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
 
-[Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)
-[Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
-[Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
-[CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
+* [Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)
+* [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
+* [Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
+* [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
 
 > Access project root
 
