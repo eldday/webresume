@@ -1,10 +1,10 @@
 # RESUME BUILDING WEB APPLICATION
 A set of PHP scripts that automatically build and present an interactive resume.
 
-
 # What it does
 
 ---
+
 * The entire site is a dynamically loading set of scripts that makes calls to the database to query for information and present it in an interactive website
 * The top menu builds your company history from newest to oldest (Left to right) clicking on these menu objects loads your job history in the page below it
 * The company specific pages show your job history at that company and are listed by most recent positions first vertically 
@@ -12,6 +12,7 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.:
 
+---
 
 ## Unauthenticated Access
 
@@ -28,40 +29,44 @@ The main interface to add all resume details is the Admin modal, which has butto
 ## Administrator Modal
 ![Admin Modal](images/example_admin_modal_view.png)
 
+---
+
 ### 1. **Company information** 
-**Add/Update companies**. This includes the Company name, the Company logo and an html formatted description of the Company itself
+**Add/Update companies**. 
+This includes the Company name, the Company logo and an html formatted description of the Company itself
 
 ## Companies Tab in Admin Modal
 ![Authenticated view ](images/example_companies_modal_view.png)
 
 ### 2. **Job History information** 
-**Add/Update jobs.** This includes the title of the position they held, the start and end dates, and an html formatted description of the role. 
+**Add/Update jobs.** 
+This includes the title of the position they held, the start and end dates, and an html formatted description of the role. 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
 
 ## Jobs Tab in Admin Modal
 ![Authenticated view ](images/example_jobs_modal_view.png)
 
 ### 3. **Skill Categories** 
-**Add/Update Categories.** This allows grouping of soft and hard skills by category for use on the home page of the generated site 
-
+**Add/Update Categories.** 
+This allows grouping of soft and hard skills by category for use on the home page of the generated site 
 
 ### 4. **Skills** 
-**Add/Update Skills.** This includes indicating the category the skill should be associated with.
+**Add/Update Skills.** 
+This includes indicating the category the skill should be associated with.
 
 ## Skills tab in Admin Modal
 ![Example Skills Modal](images/example_skills_modal_view.png)
 
 ### 5. **Account Management** 
-**Add/Update Users.** This includes User name , Password, and Access Level.
-
+**Add/Update Users.** 
+This includes User name , Password, and Access Level.
 
 ### 6. **Profile**
-**Update Profile Information** The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
+**Update Profile Information** 
+The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
 
 ## Profle tab in Admin Modal
 ![Update Profile in Modal](images/example_profile_modal_view.png) 
-
-
 ---
 
 ## How to use:
@@ -86,6 +91,7 @@ If they held more than one role, additional entries can be made associated with 
 #### Debin Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
+
 ```
 sudo apt update
 sudo apt install apache2
@@ -97,21 +103,25 @@ change the following section to show index.php first
 
 ```<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
-</IfModule>```
+</IfModule>
+```
 
 > For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
 
-* *[Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)*
-* *[Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)*
-* *[Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)*
-* *[CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)*
+* [Debian Apache PHP MariaDB Install](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10/)
+
+* [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
+
+* [Fedora LAMP Installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
+
+* [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
 
 > Access project root
 
 ``` cd /sourcedir  ```
 
-> Linux Server running Debian
-> update the db_connection script to match your database installation
+update the db_connection script to match your database installation
+
 ```
 Replace the empty variables for:
 
@@ -120,6 +130,7 @@ Replace the empty variables for:
 	Username
 	Password
 ```
+
 > Seed the database 
 The included backup of the database has the following:
 
@@ -137,16 +148,19 @@ The included backup of the database has the following:
 ``` mysql -u [user name] -p [targer db name] < webresume.sql ```
 
 > at least one admin account defined in the User_accounts table with admin access
+
 ```
 	INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password, $accessLevel);
 ```
 > run the hasher script to encrpt the intitial admin password in the database
+
 ```
 	cd utilities
 	./hasher.php [enter]
 ```
 
 > Start the Apache2 and MySQL services 
+
 ``` 
 	sudo service apache2 start
 	sudo service mysql start
