@@ -83,6 +83,28 @@ If they held more than one role, additional entries can be made associated with 
 
 ### Configuration
 
+#### Debin Linux
+
+> Install PHP, MariaDB, Apache server  (LAMP stack):
+```
+sudo apt update
+sudo apt install apache2
+sudo apt install mariadb-server
+sudo apt install php libapache2-mod-php php-mysql
+sudo nano /etc/apache2/mods-enabled/dir.conf
+```
+chane the following section to show index.php first
+```<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
+> For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
+
+[Debian Apache PHP Mariadb](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10)
+[Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
+[Fedora LAMP installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
+[CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
+
 > Access project root
 
 ``` cd /sourcedir  ```
