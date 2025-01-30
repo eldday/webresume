@@ -11,7 +11,7 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
 
 // Connect to MySQL without selecting a database
 try {
-    $pdo = new PDO("mysql:host=localhost;charset=utf8", "pday", "quality");
+    $pdo = new PDO("mysql:host=localhost;charset=utf8", "username", "password");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch the list of databases
