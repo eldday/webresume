@@ -140,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="list">
+<link rel="stylesheet" href="css/modal-style.css">
         <h2>Companies</h2>
         <ul>
             <?php foreach ($records as $recordItem): ?>
@@ -153,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="details">
+<link rel="stylesheet" href="css/modal-style.css">
         <?php if ($record): ?>
             <h2>Edit Company</h2>
         <?php else: ?>

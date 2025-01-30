@@ -149,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+<link rel="stylesheet" href="css/modal-style.css">
     <div class="list">
         <h2>Profile</h2>
         <ul>
@@ -163,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="details">
+<link rel="stylesheet" href="css/modal-style.css">
         <?php if ($record): ?>
             <h2>Edit Profile</h2>
         <?php else: ?>

@@ -134,9 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
     </style>
 </head>
 <body>
+<link rel="stylesheet" href="css/modal-style.css">
     <div class="sidebar">
         <h2>Existing Users</h2>
         <ul class="user-list">
+<link rel="stylesheet" href="css/modal-style.css">
             <?php foreach ($users as $user): ?>
                 <li>
                     <a href="?user_id=<?php echo $user['id']; ?>">
@@ -147,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
         </ul>
     </div>
     <div class="main">
+<link rel="stylesheet" href="css/modal-style.css">
         <h1>User Management</h1>
 
         <?php if (!empty($message)): ?>

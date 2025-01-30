@@ -137,6 +137,7 @@ if (isset($_POST['add_category'])) {
 </head>
 <body>
 <div class="list">
+<link rel="stylesheet" href="css/modal-style.css">
     <h2>Skills</h2>
     <ul>
         <?php foreach ($skills as $skill): ?>
@@ -150,6 +151,7 @@ if (isset($_POST['add_category'])) {
 </div>
 
 <div class="details">
+<link rel="stylesheet" href="css/modal-style.css">
     <h2><?= $selectedSkill ? 'Edit Skill' : 'Add New Skill' ?></h2>
     <form method="POST">
         <?php if ($selectedSkill): ?>

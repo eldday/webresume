@@ -170,6 +170,7 @@ if (isset($_POST['add_company'])) {
     </style>
 </head>
 <body>
+<link rel="stylesheet" href="css/modal-style.css">
     <?php
     // Fetch all companies for the dropdown
     $companies = [];

@@ -146,7 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['select_user'])) {
     </style>
 </head>
 <body>
+<link rel="stylesheet" href="css/modal-style.css">
     <div class="sidebar">
+<link rel="stylesheet" href="css/modal-style.css">
         <h2>Existing Users</h2>
         <ul class="user-list">
             <?php foreach ($users as $user): ?>
@@ -160,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['select_user'])) {
         </ul>
     </div>
     <div class="main">
+<link rel="stylesheet" href="css/modal-style.css">
         <h1>User Management</h1>
 
         <?php if (!empty($message)): ?>

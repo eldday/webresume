@@ -214,9 +214,19 @@ function handleLogout() {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+	<script>
+		window.onload = function() {
+    		var cssLink = document.createElement("link");
+    		cssLink.href = "css/modal-style.css"; 
+    		cssLink.rel = "stylesheet";
+    		cssLink.type = "text/css";
+    		document.head.appendChild(cssLink);
+		};
+	</script>
               <iframe id="navmodal" src="info.htm" width="100%" height="450" frameborder="0"></iframe>
             </div>
             <div class="modal-footer">
+   	      <button type="button" class="btn btn-secondary" onclick="updateIframe('utilities/config.php')">Config</button>
               <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Users</button>
 	      <button type="button" class="btn btn-secondary" onclick="updateIframe('profiles.php')">Profile</button>	
               <button type="button" class="btn btn-secondary" onclick="updateIframe('companies.php')">Companies</button>
