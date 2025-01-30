@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -9,15 +8,17 @@ if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
     exit();
 }
 
+$message = ""; // Store messages to display
+
 // Connect to MySQL without selecting a database
 try {
-    $pdo = new PDO("mysql:host=localhost;charset=utf8", "username", "password");
+    $pdo = new PDO("mysql:host=localhost;charset=utf8", "pday", "quality");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch the list of databases
     $databases = $pdo->query("SHOW DATABASES")->fetchAll(PDO::FETCH_COLUMN);
 } catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    $message = "Database connection failed: " . $e->getMessage();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,30 +44,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $configPath = 'utilities/db_connection.php';
         if (is_writable(dirname($configPath))) {
             if (file_put_contents($configPath, $configContent) !== false) {
-                echo "Database configuration updated successfully.";
+                $message = "<p style='color: green;'>Database configuration updated successfully.</p>";
             } else {
-                echo "Failed to update database configuration.";
+                $message = "<p style='color: red;'>Failed to update database configuration.</p>";
             }
         } else {
-            echo "Error: Configuration file directory is not writable. Check permissions.";
+            $message = "<p style='color: red;'>Error: Configuration file directory is not writable. Check permissions.</p>";
         }
     } else {
-        echo "All fields are required.";
+        $message = "<p style='color: red;'>All fields are required.</p>";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database Configuration</title>
-<link rel="stylesheet" href="css/modal-style.css">
+    <link rel="stylesheet" href="css/modal-style.css">
 </head>
 <body>
     <div class="container">
 <link rel="stylesheet" href="css/modal-style.css">
         <h2>Update Database Configuration</h2>
+        <p>Warning you are configuring the connection to the database if you accidentally  specify the wrong credentials or  database  the site will not run until you update db_connection.php from console!</p>
+        <?php echo $message; ?>
         <form method="post">
             <label>Database Name:</label>
             <select name="dbname" required>
@@ -74,14 +78,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="<?php echo htmlspecialchars($db); ?>"><?php echo htmlspecialchars($db); ?></option>
                 <?php endforeach; ?>
             </select>
-            
+
             <label>Username:</label>
             <input type="text" name="username" required>
-            
+
             <label>Password:</label>
             <input type="password" name="password" required>
-            
-            <button type="submit">Update Config</button>
+
+            <br><button align="right" type="submit">Update Config</button>
         </form>
     </div>
 </body>

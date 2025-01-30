@@ -175,7 +175,7 @@ if (isset($_POST['add_company'])) {
     // Fetch all companies for the dropdown
     $companies = [];
     try {
-        $stmt = $pdo->query("SELECT company_id, company_name FROM resume.companies");
+        $stmt = $pdo->query("SELECT company_id, company_name FROM companies");
         $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         die("Error fetching companies: " . $e->getMessage());
