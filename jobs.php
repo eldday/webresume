@@ -202,8 +202,14 @@ if (isset($_POST['add_job'])) {
                 <label for="job_description">Job Description:</label>
                 <textarea id="job_description" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>
 
-                <button type="submit">Update</button>
-            </form>
+              <label for="Start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+
+              <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required>
+
+	        <button type="submit">Update</button>
+	</form>
         <?php endif; ?>
 
         <!-- Add New Job -->
@@ -223,7 +229,13 @@ if (isset($_POST['add_job'])) {
             <input type="text" id="job_title_new" name="job_title" required>
 
             <label for="job_description_new">Job Description:</label>
-            <textarea id="job_description_new" name="job_description" required></textarea>
+            <textarea id="job_description_new" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>
+
+              <label for="start_date">Start_date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+
+              <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required>
 
             <button type="submit" name="add_job">Add Job</button>
         </form>
