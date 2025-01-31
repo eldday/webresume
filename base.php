@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['accessLevel'])) {
-echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
+//echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
 }
 // Define session timeout duration (e.g., 30 minutes)
 $timeoutDuration = 1800; // 30 minutes in seconds
@@ -91,10 +91,11 @@ try {
 		/* Header Section */
 header {
     position: relative;
-    height: 230px; /* Adjust as needed */
+    height: 240px; /* Adjust as needed */
     background-image: url('images/<?php echo htmlspecialchars($profile['bg_image']); ?>'); /* Dynamic background */
     background-size: cover;
     background-position: center;
+    margin-top: 0px;
     display: flex;
     align-items: left;
     justify-content: center;
@@ -217,7 +218,7 @@ header {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
            max-width: 1200px; 
        }
         .column {
@@ -298,7 +299,6 @@ header {
 <body>
 <header>
     <div class="content">
-	<br><br><br>
         <h1><?php echo htmlspecialchars($profile['profile_name']); ?></h1>
 	<p><?php echo htmlspecialchars($profile['profile_description']); ?></p><br>
         <a class="link" href="<?php echo htmlspecialchars($profile['linkedin_url']); ?>" target="_blank"><img src="images/linkedin_white_28dp.png" width="32" height="32"></a>

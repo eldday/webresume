@@ -63,11 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database Configuration</title>
-    <link rel="stylesheet" href="css/modal-style.css">
 </head>
 <body>
-    <div class="container">
 <link rel="stylesheet" href="css/modal-style.css">
+    <div class="main">
+<hr style="height:3px;border-width:0;color:white;background-color:blue">
         <h2>Update Database Configuration</h2>
         <p>Warning you are configuring the connection to the database if you accidentally  specify the wrong credentials or  database  the site will not run until you update db_connection.php from console!</p>
         <?php echo $message; ?>

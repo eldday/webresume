@@ -1,50 +1,97 @@
+
+.h2 {
+"background color:#93a1a9";
+}
+.container {
+    display: flex;
+    gap: 20px; /* Adds space between sections */
+    align-items: flex-start; /* Aligns to the top */
+}
+
+.list {
+    flex: 1; /* Takes 1 part of the available space */
+    max-width: 25%; /* Limits width */
+}
+
+.details {
+    flex: 2; /* Takes 2 parts of the available space */
+    max-width: 90%; /* Ensures form doesn't get too wide */
+}
+
+.list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.list li {
+    padding: 10px;
+    background:  #93a9b8;
+    margin-bottom: 5px;
+}
+
+form {
+    background:  #c3d0d9;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+ modal-footer { 
+background-color: rgb( 111, 222, 222 );
+        }
+
+modal-header { 
+background-color:#6c6f70; 
+	}
         * {
-            /*box-sizing: border-box;*/
+      	box-sizing: content-box;
         }
-        modal-body {
-            font-family: Arial, sans-serif;
-            background-color: transparent; /* Keeps it modal-friendly */
-            margin: 10;
-            padding: 5;
-            text-align: center;
+.modal-body {
+  font-family: Source Code Pro, Arial;
+  background-color: #a9b8c2; /* Keeps it modal-friendly */
+  margin: 10;
+  padding: 10;
+  text-align: auto;
         }
-        .container {
-            background: grey;
-            padding: 5px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-            text-align: left;
-            max-width: 400px;
-            width: 100%;
-            overflow: auto;
+ .container {
+   background:  #d0d2d3;
+   align-items: center;
+   padding: 5px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+   display: inline-grid;
+   text-align: auto;
+   max-width: 600px;
+   width: 90%;
+   overflow: auto;
         }
-        label {
-            display: block;
-            margin-top: 10px;
+  
+  label {
+    display: block;
+    margin-top: 10px;
         }
-        input, select, button {
+  input, select, button {
             width: auto;
             padding: 5px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        button {
+   button {
             background-color: #28a745;
             color: white;
             border: none;
             cursor: pointer;
             margin-top: 5px;
         }
-        button:hover {
+   button:hover {
             background-color: #218838;
         }
-        .success {
+   .success {
             color: green;
             font-weight: bold;
         }
-        .error {
+   .error {
             color: red;
             font-weight: bold;
         }

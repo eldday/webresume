@@ -151,6 +151,7 @@ if (isset($_POST['add_category'])) {
 </div>
 
 <div class="details">
+ <hr style="height:3px;border-width:0;color:white;background-color:blue">
 <link rel="stylesheet" href="css/modal-style.css">
     <h2><?= $selectedSkill ? 'Edit Skill' : 'Add New Skill' ?></h2>
     <form method="POST">
@@ -176,7 +177,7 @@ if (isset($_POST['add_category'])) {
             <?= $selectedSkill ? 'Update Skill' : 'Add Skill' ?>
         </button>
     </form>
-
+ <hr style="height:3px;border-width:0;color:white;background-color:blue">
     <h2>Add New Category</h2>
     <form method="POST">
         <label for="category_name">Category Name:</label>

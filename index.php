@@ -64,7 +64,28 @@ try {
     <title><?php echo htmlspecialchars($profile['profile_name']); ?></title>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      /* Your existing styles here */
+style>
+  /* Custom modal size */
+  .modal-dialog {
+    max-width: 90%;  /* Make modal wider */
+    height: 80%;     /* Increase modal height */
+  }
+
+  .modal-content {
+    height: 70%;   /* Ensure content fills the modal */
+  }
+
+  .modal-header {
+    background-color: #aed6f1;
+  }
+
+  .modal-title h4 {
+    font-size: 3.0rem;
+  }
+</style>
+	.modal-header { 
+	background-color: #aed6f1; 
+	}
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -226,8 +247,8 @@ function handleLogout() {
               <iframe id="navmodal" src="info.htm" width="100%" height="450" frameborder="0"></iframe>
             </div>
             <div class="modal-footer">
-   	      <button type="button" class="btn btn-secondary" onclick="updateIframe('utilities/config.php')">Config</button>
-              <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Users</button>
+   	      <button type="button" class="btn btn-secondary" onclick="updateIframe('config.php')">Config</button>
+              <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Accounts</button>
 	      <button type="button" class="btn btn-secondary" onclick="updateIframe('profiles.php')">Profile</button>	
               <button type="button" class="btn btn-secondary" onclick="updateIframe('companies.php')">Companies</button>
               <button type="button" class="btn btn-secondary" onclick="updateIframe('jobs.php')">Jobs</button>
@@ -246,7 +267,7 @@ function handleLogout() {
 
       <!-- Login Modal -->
       <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="loginModalLabel">Login</h5>
@@ -256,11 +277,11 @@ function handleLogout() {
               <form id="loginForm">
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="username" name="username" required>
+                  <input type="text" width="80%" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" required>
+                  <input type="password" width="80%" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
               </form>

@@ -166,8 +166,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="details">
 <link rel="stylesheet" href="css/modal-style.css">
         <?php if ($record): ?>
+<hr style="height:3px;border-width:0;color:white;background-color:blue">
             <h2>Edit Profile</h2>
         <?php else: ?>
+<hr style="height:3px;border-width:0;color:white;background-color:blue">
             <h2>Add New Profile</h2>
         <?php endif; ?>
 

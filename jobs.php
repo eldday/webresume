@@ -1,6 +1,4 @@
 <?php
-
-
 require_once 'utilities/db_connection.php';
 
 session_start();
@@ -9,11 +7,10 @@ session_start();
 if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
     http_response_code(403);
     echo "Access Denied!";
- 
-   exit();
+    exit();
 }
 
-// Fetch all records for the job list
+// Fetch all job records
 $records = [];
 try {
     $stmt = $pdo->query("SELECT job_id, job_title FROM Job_history ORDER BY start_date DESC");
@@ -22,7 +19,7 @@ try {
     die("Error fetching job records: " . $e->getMessage());
 }
 
-// Fetch all companies for the dropdown
+// Fetch all companies
 $companies = [];
 try {
     $stmt = $pdo->query("SELECT company_id, company_name FROM companies");
@@ -72,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['job_id'])) {
             $stmt->bindParam(':start_date', $start_date);
             $stmt->bindParam(':end_date', $end_date);
             $stmt->execute();
-            $message = "Job updated successfully!";
+            $message = '<p style="color: green;">Job updated successfully!</p>';
         } catch (PDOException $e) {
-            $message = "Error updating job: " . $e->getMessage();
+            $message = '<p style="color: red;">Error updating job: ' . $e->getMessage() . '</p>';
         }
     } else {
-        $message = "Please fill in all fields.";
+        $message = '<p style="color: red;">Please fill in all fields.</p>';
     }
 }
 
@@ -99,33 +96,12 @@ if (isset($_POST['add_job'])) {
             $stmt->bindParam(':start_date', $start_date);
             $stmt->bindParam(':end_date', $end_date);
             $stmt->execute();
-            $message = "Job added successfully!";
+            $message = '<p style="color: green;">Job added successfully!</p>';
         } catch (PDOException $e) {
-            $message = "Error adding job: " . $e->getMessage();
+            $message = '<p style="color: red;">Error adding job: ' . $e->getMessage() . '</p>';
         }
     } else {
-        $message = "Please fill in all fields.";
-    }
-}
-
-// Add a new company
-if (isset($_POST['add_company'])) {
-    $company_name = $_POST['company_name'] ?? "";
-    $description = $_POST['description'] ?? "";
-
-    if ($company_name && $description) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO companies (company_name, description)
-                VALUES (:company_name, :description)");
-            $stmt->bindParam(':company_name', $company_name);
-            $stmt->bindParam(':description', $description);
-            $stmt->execute();
-            $message = "Company added successfully!";
-        } catch (PDOException $e) {
-            $message = "Error adding company: " . $e->getMessage();
-        }
-    } else {
-        $message = "Please fill in all fields.";
+        $message = '<p style="color: red;">Please fill in all fields.</p>';
     }
 }
 ?>
@@ -135,54 +111,62 @@ if (isset($_POST['add_company'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Jobs and Companies</title>
-    <!-- Include CKEditor 5 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="css/modal-style.css">
     <style>
         body {
             display: flex;
             font-family: Arial, sans-serif;
         }
-        .list {
+	.details {
+	width: 70%;
+	padding: 10px;
+
+	}
+        .sidebar {
             width: 20%;
+            padding: 10px;
+            border-right: 2px solid #ccc;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 5px;
+        }
+        .user-list {
+            list-style: none;
+            padding: 5;
+        }
+        .user-list li {
+            margin-bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.059);
+            border: solid #ffffff1f 0.75pt;
+            border-width: 15 15 1px 0; /* Bottom border only */
+            line-height: 1.2;
+            margin-bottom: 5px;
+            padding: 6pt 4pt;
+            text-indent: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .list {
+            width: 30%;
             border-right: 1px solid #ccc;
             padding: 10px;
         }
-        .list ul {
+        ul {
             list-style: none;
             padding: 0;
         }
-        .list ul li {
+        ul li {
             margin: 5px 0;
-        }
-        .list ul li a {
-            text-decoration: none;
-            color: blue;
-        }
-        .details {
-            width: 80%;
-            padding: 10px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
     </style>
 </head>
 <body>
-<link rel="stylesheet" href="css/modal-style.css">
-    <?php
-    // Fetch all companies for the dropdown
-    $companies = [];
-    try {
-        $stmt = $pdo->query("SELECT company_id, company_name FROM companies");
-        $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        die("Error fetching companies: " . $e->getMessage());
-    }
-    ?>
+    <?php echo $message; ?>
+
     <div class="list">
-        <h2>Job History</h2>
+<link rel="stylesheet" href="css/modal-style.css">
+        <h2 style="background color:#93a1a9">Job History</h2>
         <ul>
             <?php foreach ($records as $recordItem): ?>
                 <li>
@@ -197,13 +181,13 @@ if (isset($_POST['add_company'])) {
     <div class="details">
         <!-- Edit Job Form -->
         <?php if ($record): ?>
-            <h2>Edit Job</h2>
-            <form method="POST" action="">
+<hr style="height:3px;border-width:0;color:white;background-color:blue">
+            <h2 style="background color:#93a1a9">Edit Job</h2>
+            <form method="POST">
                 <input type="hidden" name="job_id" value="<?php echo htmlspecialchars($record['job_id']); ?>">
 
                 <label for="company_id">Company:</label>
                 <select id="company_id" name="company_id" required>
-                    <option value="">Select a company</option>
                     <?php foreach ($companies as $company): ?>
                         <option value="<?php echo htmlspecialchars($company['company_id']); ?>"
                             <?php echo ($record['company_id'] == $company['company_id']) ? 'selected' : ''; ?>>
@@ -213,30 +197,21 @@ if (isset($_POST['add_company'])) {
                 </select>
 
                 <label for="job_title">Job Title:</label>
-                <input type="text" id="job_title" name="job_title"
-                    value="<?php echo htmlspecialchars($record['job_title']); ?>" required>
+                <input type="text" id="job_title" name="job_title" value="<?php echo htmlspecialchars($record['job_title']); ?>" required>
 
                 <label for="job_description">Job Description:</label>
                 <textarea id="job_description" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>
-
-                <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date"
-                    value="<?php echo htmlspecialchars($record['start_date']); ?>" required>
-
-                <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date"
-                    value="<?php echo htmlspecialchars($record['end_date']); ?>" required>
 
                 <button type="submit">Update</button>
             </form>
         <?php endif; ?>
 
         <!-- Add New Job -->
-        <h2>Add New Job</h2>
-        <form method="POST" action="">
-            <label for="company_id">Company:</label>
-            <select id="company_id" name="company_id" required>
-                <option value="">Select a company</option>
+<hr style="height:3px;border-width:0;color:white;background-color:blue">
+        <h2 style="background color:#93a1a9">Add New Job</h2>
+        <form method="POST">
+            <label for="company_id_new">Company:</label>
+            <select id="company_id_new" name="company_id" required>
                 <?php foreach ($companies as $company): ?>
                     <option value="<?php echo htmlspecialchars($company['company_id']); ?>">
                         <?php echo htmlspecialchars($company['company_name']); ?>
@@ -244,28 +219,25 @@ if (isset($_POST['add_company'])) {
                 <?php endforeach; ?>
             </select>
 
-            <label for="job_title">Job Title:</label>
-            <input type="text" id="job_title" name="job_title" required>
+            <label for="job_title_new">Job Title:</label>
+            <input type="text" id="job_title_new" name="job_title" required>
 
-            <label for="job_description">Job Description:</label>
-            <textarea id="job_description" name="job_description"></textarea>
-
-            <label for="start_date">Start Date:</label>
-            <input type="date" id="start_date" name="start_date" required>
-
-            <label for="end_date">End Date:</label>
-            <input type="date" id="end_date" name="end_date" required>
+            <label for="job_description_new">Job Description:</label>
+            <textarea id="job_description_new" name="job_description" required></textarea>
 
             <button type="submit" name="add_job">Add Job</button>
         </form>
-
+    </div>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#job_description'))
-            .catch(error => {
-                console.error(error);
+        document.addEventListener("DOMContentLoaded", function () {
+            ['job_description', 'job_description_new'].forEach(id => {
+                let field = document.getElementById(id);
+                if (field) {
+                    ClassicEditor.create(field).catch(error => console.error(error));
+                }
             });
+        });
     </script>
 </body>
 </html>

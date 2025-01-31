@@ -106,30 +106,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
             display: flex;
             font-family: Arial, sans-serif;
         }
+	.details {
+	    width: 70%;
+	    padding: 10px;
+	}
         .sidebar {
             width: 20%;
-            padding: 20px;
+            padding: 10px;
             border-right: 2px solid #ccc;
         }
         .main {
             flex-grow: 1;
-            padding: 10px;
+            padding: 5px;
         }
         .user-list {
             list-style: none;
-            padding: 0;
+            padding: 5;
         }
         .user-list li {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             background-color: rgba(0, 0, 0, 0.059);
             border: solid #ffffff1f 0.75pt;
-            border-width: 20 20 1px 0; /* Bottom border only */
+            border-width: 15 15 1px 0; /* Bottom border only */
             line-height: 1.2;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             padding: 6pt 4pt;
             text-indent: 0;
-            font-size: 18px;
+            font-size: 16px;
             color: #333;
+        }
+        .list {
+            width: 30%;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -148,9 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="main">
-<link rel="stylesheet" href="css/modal-style.css">
-        <h1>User Management</h1>
+    <div class="details">
+	<link rel="stylesheet" href="css/modal-style.css">
+         <hr style="height:3px;border-width:0;color:white;background-color:blue">
+	<h2>User Management</h2>
 
         <?php if (!empty($message)): ?>
             <p><?php echo htmlspecialchars($message); ?></p>
