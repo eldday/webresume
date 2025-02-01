@@ -19,9 +19,17 @@ A set of PHP scripts that automatically build and present an interactive resume.
 
 ![Unauthenticated view ](images/example-unauthenticated-acces.png)
 
+## Job History Page
+
+![Job History View](images/example-job-history-page.png)
+
+## Company Info Modal in Job History Page
+
+![Company Info Modal](images/example-company-info-modal.png)
+
 ## Authenticated login with Administrator level credentials
 
-![Authenticated view ](images/example-authenticated-login.png)
+![Authenticated view](images/example-authenticated-login.png)
 
 # Admin Modal
 The main interface to add all resume details is the Admin modal, which has buttons in the modal footer that allow input for the following:
