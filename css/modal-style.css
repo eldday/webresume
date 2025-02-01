@@ -44,7 +44,6 @@ modal-header {
 background-color:#6c6f70; 
 	}
         * {
-      	box-sizing: content-box;
         }
 .modal-body {
   font-family: Source Code Pro, Arial;
