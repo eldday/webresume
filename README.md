@@ -50,14 +50,14 @@ This includes User name , Password, and Access Level.
 The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
 
 ## Profle tab in Admin Modal
-![Update Profile in Modal](images/example-profiles-admin-modal.png) 
+![Profiles in Modal](images/example-profiles-admin-modal.png) 
 
 ### 4. **Company information** 
 **Add/Update companies**. 
 This includes the Company name, the Company logo and an html formatted description of the Company itself
 
 ## Companies Tab in Admin Modal
-![Authenticated view ](images/example-admin-companies-modal.png)
+![Companies in Modal](images/example-admin-companies-modal.png)
 
 ### 5. **Job History information** 
 **Add/Update jobs.** 
@@ -65,7 +65,7 @@ This includes the title of the position they held, the start and end dates, and 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
 
 ## Jobs Tab in Admin Modal
-![Authenticated view ](images/example-admin-jobs-modal.png)
+![Jobs in Modal](images/example-admin-jobs-modal.png)
 
 ### 6. **Skill Categories** 
 **Add/Update Categories.** 
@@ -74,7 +74,7 @@ This allows grouping of soft and hard skills by category for use on the home pag
 This includes indicating the category the skill should be associated with.
 
 ## Skills tab in Admin Modal
-![Example Skills Modal](images/example-admin-skills-modal.png)
+![Skills in Modal](images/example-admin-skills-modal.png)
 
 ---
 ## How to use:
