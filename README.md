@@ -49,7 +49,7 @@ This includes User name , Password, and Access Level.
 **Update Profile Information** 
 The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
 
-## Profle tab in Admin Modal
+## Profiles tab in Admin Modal
 ![Profiles in Modal](images/example-profiles-admin-modal.png) 
 
 ### 4. **Company information** 
