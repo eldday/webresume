@@ -35,7 +35,7 @@ The main interface to add all resume details is the Admin modal, which has butto
 The configuration for connecting to the database can be updated here, including selecting the target database from a drop-down of existing databases, as well as the username and password that connects to the host. The host configuration has been excluded from this configuration screen
 
 ## Config tab in Admin Modal
-![Config Database in Modal](images/Config-admin-modal.png) 
+![Config Database in Modal](images/example-config-admin-modal.png) 
 
 
 ### 2. **Accounts** 
@@ -43,7 +43,7 @@ The configuration for connecting to the database can be updated here, including 
 This includes User name , Password, and Access Level.
 
 ## Accounts tab in Admin Modal
-![Accounts in Modal](images/accounts-admin-portal.png)
+![Accounts in Modal](images/example-accounts-admin-modal.png)
 
 ### 3. **Profile**
 **Update Profile Information** 
@@ -57,7 +57,7 @@ The initial base.php page and the top menu both get information from the profile
 This includes the Company name, the Company logo and an html formatted description of the Company itself
 
 ## Companies Tab in Admin Modal
-![Authenticated view ](images/example-company-modal.png)
+![Authenticated view ](images/example-admin-companies-modal.png)
 
 ### 5. **Job History information** 
 **Add/Update jobs.** 
