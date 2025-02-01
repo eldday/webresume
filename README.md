@@ -17,25 +17,25 @@ A set of PHP scripts that automatically build and present an interactive resume.
 
 ## Unauthenticated Access
 
-![Unauthenticated view ](images/example_default_page.png)
+![Unauthenticated view ](images/example-unauthenticated-acces.png)
 
 ## Authenticated login with Administrator level credentials
 
-![Authenticated view ](images/example_default_view.png)
+![Authenticated view ](images/example-authenticated-login.png)
 
 # Admin Modal
 The main interface to add all resume details is the Admin modal, which has buttons in the modal footer that allow input for the following:
 
 
 ## Administrator Modal
-![Admin Modal](images/example_admin_modal_view.png)
+![Admin Modal](images/example-admin-modal.png)
 
 ### 1. **Config**
 **Update database connection details** 
 The configuration for connecting to the database can be updated here, including selecting the target database from a drop-down of existing databases, as well as the username and password that connects to the host. The host configuration has been excluded from this configuration screen
 
 ## Config tab in Admin Modal
-![Config Database in Modal](images/example_config_admin_portal.png) 
+![Config Database in Modal](images/Config-admin-modal.png) 
 
 
 ### 2. **Accounts** 
@@ -43,21 +43,21 @@ The configuration for connecting to the database can be updated here, including 
 This includes User name , Password, and Access Level.
 
 ## Accounts tab in Admin Modal
-![Accounts in Modal](images/example_accounts_admin_portal.png)
+![Accounts in Modal](images/accounts-admin-portal.png)
 
 ### 3. **Profile**
 **Update Profile Information** 
 The initial base.php page and the top menu both get information from the profile table in the database. These values can be updated in the admin console modal. 
 
 ## Profle tab in Admin Modal
-![Update Profile in Modal](images/example_profile_modal_view.png) 
+![Update Profile in Modal](images/example-admin-profile-modal.png) 
 
 ### 4. **Company information** 
 **Add/Update companies**. 
 This includes the Company name, the Company logo and an html formatted description of the Company itself
 
 ## Companies Tab in Admin Modal
-![Authenticated view ](images/example_companies_modal_view.png)
+![Authenticated view ](images/example-company-modal.png)
 
 ### 5. **Job History information** 
 **Add/Update jobs.** 
@@ -65,7 +65,7 @@ This includes the title of the position they held, the start and end dates, and 
 If they held more than one role, additional entries can be made associated with that same company and the resulting company page would show all roles chronologically from most recent to oldest role 
 
 ## Jobs Tab in Admin Modal
-![Authenticated view ](images/example_jobs_modal_view.png)
+![Authenticated view ](images/example-admin-jobs-modal.png)
 
 ### 6. **Skill Categories** 
 **Add/Update Categories.** 
@@ -74,7 +74,7 @@ This allows grouping of soft and hard skills by category for use on the home pag
 This includes indicating the category the skill should be associated with.
 
 ## Skills tab in Admin Modal
-![Example Skills Modal](images/example_skills_modal_view.png)
+![Example Skills Modal](images/example-admin-skills-modal.png)
 
 ---
 ## How to use:
@@ -132,7 +132,9 @@ change the following section to show index.php first
 
 ``` cd /sourcedir  ```
 
-update the db_connection script to match your database installation
+update the utilities/db_connecttion script to match your database installation
+change the owner and group for the utilities directory, and the images directory
+the owner must be set the same as the http server uses (apache2 , nginx, etc...)
 
 ```
 Replace the empty variables for:
