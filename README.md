@@ -180,6 +180,14 @@ The included backup of the database has the following:
 	cd utilities
 	./hasher.php [enter]
 ```
+> Copy the repo into /var/www/html and set the right permissions
+
+```
+  sudo chown -R www-data:www-data images/
+  sudo chown -R www-data:www-data utilities/
+  sudo chmod 755 utilities
+  sudo chmod 644 utilities/db_connection.php
+```
 
 > Start the Apache2 and MySQL services 
 
