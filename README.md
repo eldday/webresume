@@ -118,7 +118,7 @@ This includes indicating the category the skill should be associated with.
 
 ---
 
-#### Debin Linux
+#### Debian Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
 
