@@ -68,26 +68,26 @@ style>
   /* Custom modal size */
   .modal-dialog {
     max-width: 90%;  /* Make modal wider */
-    height: 90%;     /* Increase modal height */
-  	}
+    max-height: 90%;     /* Increase modal height */
+        }
 
   .modal-content {
-    height: 70%;   /* Ensure content fills the modal */
-  	}
+    height: 90%;   /* Ensure content fills the modal */
+        }
 
   .modal-header {
     background-color: #aed6f1;
-  	}
+        }
 
   .modal-title h4 {
     font-size: 3.0rem;
-	  }
-	.modal-header { 
-	background-color: #aed6f1; 
-	}
-	.modal-footer {
-	background-color: #000;
-	}
+          }
+        .modal-header {
+        background-color: #aed6f1;
+        }
+        .modal-footer {
+        background-color: #000;
+        }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -95,29 +95,47 @@ style>
         -moz-user-select: none;
         user-select: none;
       }
-      @media (min-width: 768px) {
+      @media (min-width: 1200px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
      .modal-title h4 {
-	font-size: 3.0rem;
+        font-size: 3.0rem;
+        }
+
+	#tooltip-container {
+ 	  position: absolute;
+    	  left: 10px; /* Adjust for positioning to the left of buttons */
+	  text-align-last: center;
+	  vertical-align: top;
+   	  transform: translateY(-90%);
+  	  background-color: rgba(0, 0, 0, 0.75);
+   	  color: white;
+  	  padding: 4px 6px;
+  	  border-radius: 6px;
+  	  display: none; /* Initially hidden */
+  	  font-size: 18px;
+  	  white-space: nowrap;
+  	  pointer-events: none;
+  	  margin-bottom: 40px;
+	  margin-top: 0px;
 	}
     </style>
   <script>
-	document.addEventListener('DOMContentLoaded', () => {
-	    fetch('checkAuth.php', { cache: 'no-store' })
-	        .then(response => response.json())
-	        .then(result => {
-	            if (result.success) {
-	                sessionStorage.setItem('accessLevel', result.accessLevel);
-	                checkAccessLevel(result.accessLevel);
-	            } else {
-	                sessionStorage.removeItem('accessLevel');
-	                checkAccessLevel('view');
-	            }
-	        });
-	});
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('checkAuth.php', { cache: 'no-store' })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        sessionStorage.setItem('accessLevel', result.accessLevel);
+                        checkAccessLevel(result.accessLevel);
+                    } else {
+                        sessionStorage.removeItem('accessLevel');
+                        checkAccessLevel('view');
+                    }
+                });
+        });
 
       function checkAccessLevel(accessLevel) {
         const addUpdateButton = document.querySelector('#addUpdateButton');
@@ -187,6 +205,26 @@ function handleLogout() {
         });
 }
 
+  document.addEventListener('DOMContentLoaded', function () {
+    const tooltipContainer = document.getElementById('tooltip-container');
+    const buttons = document.querySelectorAll('.tooltip-button');
+
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', function () {
+        const tooltipText = this.getAttribute('data-tooltip');
+        tooltipContainer.textContent = tooltipText;
+        tooltipContainer.style.display = 'block';
+
+        // Positioning the tooltip relative to the button
+        const rect = this.getBoundingClientRect();
+        tooltipContainer.style.top = `${rect.top + window.scrollY}px`;
+      });
+
+      button.addEventListener('mouseleave', function () {
+        tooltipContainer.style.display = 'none';
+      });
+    });
+  });
 
 </script>
 
@@ -196,7 +234,7 @@ function handleLogout() {
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()">
-            <img src="images/DDAYLOGO.gif" height="70"><?php echo htmlspecialchars($profile['profile_name']); ?> 
+            <img src="images/DDAYLOGO.gif" height="70"><?php echo htmlspecialchars($profile['profile_name']); ?>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -237,41 +275,42 @@ function handleLogout() {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-	<script>
-		window.onload = function() {
-    		var cssLink = document.createElement("link");
-    		cssLink.href = "css/modal-style.css"; 
-    		cssLink.rel = "stylesheet";
-    		cssLink.type = "text/css";
-    		document.head.appendChild(cssLink);
-		};
-	</script>
-   <br><br>           <iframe id="navmodal" src="info.htm" width="100%" height="450" frameborder="0"></iframe>
+        <script>
+                window.onload = function() {
+                var cssLink = document.createElement("link");
+                cssLink.href = "css/modal-style.css";
+                cssLink.rel = "stylesheet";
+                cssLink.type = "text/css";
+                document.head.appendChild(cssLink);
+                };
+        </script>
+   <br><br>           <iframe id="navmodal" src="system_info.php" width="100%" height="450" frameborder="0"></iframe>
             </div>
-            <div class="modal-footer">
-   	      <button type="button" class="btn btn-secondary" onclick="updateIframe('config.php')">Config</button>
-              <button type="button" class="btn btn-secondary" onclick="updateIframe('accounts.php')">Accounts</button>
-	      <button type="button" class="btn btn-secondary" onclick="updateIframe('profiles.php')">Profile</button>	
-              <button type="button" class="btn btn-secondary" onclick="updateIframe('companies.php')">Companies</button>
-              <button type="button" class="btn btn-secondary" onclick="updateIframe('jobs.php')">Jobs</button>
-              <button type="button" class="btn btn-secondary" onclick="updateIframe('skills.php')">Skills</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+		<div class="modal-footer">
+  		   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('config.php')" data-tooltip="Configure database connection.">Config</button>
+	    	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('accounts.php')" data-tooltip="Manage user accounts">Accounts</button>
+	  	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('profiles.php')" data-tooltip="Edit profile details">Profile</button>
+	  	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('companies.php')" data-tooltip="View and manage companies">Companies</button>
+	 	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('jobs.php')" data-tooltip="Add or Update job history">Jobs</button>
+	 	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('skills.php')" data-tooltip="Update skill sets">Skills</button>
+		   <button type="button" class="btn btn-secondary tooltip-button" data-bs-dismiss="modal" data-tooltip="Close this window">Close</button>
+		   <div id="tooltip-container" class="tooltip-box"></div>
+		</div>
           </div>
         </div>
       </div>
-
-	<script>
-	  function updateIframe(src) {
-	    document.getElementById('navmodal').src = src;
-	  }
-	</script>
+<
+        <script>
+          function updateIframe(src) {
+            document.getElementById('navmodal').src = src;
+          }
+        </script>
 
       <!-- Login Modal -->
 <script>
 .modal-body {
-	box-sizing: border-box;
-	}
+        box-sizing: border-box;
+        }
 
 </script>
       <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -305,7 +344,7 @@ function handleLogout() {
 
       <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
       <script>
-	// navigation modal 
+        // navigation modal
 
          document.querySelectorAll('navmodal a').forEach(link => {
           link.addEventListener('click', function(event) {
@@ -317,11 +356,11 @@ function handleLogout() {
 
         // Resize iframe to fit content dynamically
 
-	function resizeIframe(iframe) {
-    	const contentHeight = iframe.contentWindow.document.body.scrollHeight; // Get the content height
-    	const viewportHeight = window.innerHeight; // Get the viewport height
-    	iframe.style.height = Math.max(contentHeight, viewportHeight) + 'px'; // Use the larger value
-		}
+        function resizeIframe(iframe) {
+        const contentHeight = iframe.contentWindow.document.body.scrollHeight; // Get the content height
+        const viewportHeight = window.innerHeight; // Get the viewport height
+        iframe.style.height = Math.max(contentHeight, viewportHeight) + 'px'; // Use the larger value
+                }
 
         // Attach event listeners to navigation links
         document.querySelectorAll('nav a').forEach(link => {
@@ -334,15 +373,15 @@ function handleLogout() {
 
         function refreshPage() {
                 location.reload("nav");
-	        }
+                }
 
         function refreshsite() {
         location.reload(parent);
-        	}
+                }
 
         function home() {
         $("#nav").load(parent)
-        	}
+                }
 
         // Attach event listener to login form
         document.querySelector('#loginForm').addEventListener('submit', handleLogin);
