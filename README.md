@@ -36,7 +36,7 @@ The main interface to add all resume details is the Admin modal, which has butto
 
 
 ## Administrator Modal
-![Admin Modal](images/admin-modal.png)
+![Admin Modal](images/example-admin-modal.png)
 
 ### 1. **Config**
 **Update database connection details** 
@@ -84,6 +84,18 @@ This includes indicating the category the skill should be associated with.
 ## Skills tab in Admin Modal
 ![Skills in Modal](images/example-admin-skills-modal.png)
 
+## Generate Resume as a PDF in Admin Modal
+**Create a PDF resume**
+Both FPDF and DOMPDF libraries are present; however, only DOMPDF is available from the admin modal. 
+This is because it was easier to retain the HTML formatting of the job description field which looks better than the others.
+
+![Create PDF Resume](images/example_pdf_resume_admin_modal.png)
+
+The generated PDF resume looks similar to the following:
+
+![Example PDF Resume](images/example_pdf_resume.png)
+
+
 ---
 ## How to use:
 
@@ -118,7 +130,7 @@ This includes indicating the category the skill should be associated with.
 
 ---
 
-#### Debian Linux
+#### Debin Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
 
@@ -180,14 +192,6 @@ The included backup of the database has the following:
 	cd utilities
 	./hasher.php [enter]
 ```
-> Copy the repo into /var/www/html and set the right permissions
-
-```
-  sudo chown -R www-data:www-data images/
-  sudo chown -R www-data:www-data utilities/
-  sudo chmod 755 utilities
-  sudo chmod 644 utilities/db_connection.php
-```
 
 > Start the Apache2 and MySQL services 
 
@@ -202,8 +206,6 @@ The included backup of the database has the following:
 * http(s)://Localhost
 
 ---
-
----
 ## Technologies:
 - PHP
 - Javascript
@@ -212,7 +214,11 @@ The included backup of the database has the following:
 ### Dependencies
 * *[PHP](https://www.php.net/downloads.php)*
 * *[Apache Server](https://httpd.apache.org/)*
+* *[Composer](https://getcomposer.org/)*
+* 	*[DomPDF](https://packagist.org/packages/dompdf/dompdf)*
+*	*[FPDF](https://packagist.org/packages/setasign/fpdf)*
 
+---
 
 > ![](https://github.com/eldday/webresume/blob/main/images/DDAYLOGO.gif) Patrick Day  | <a href="https://www.linkedin.com/in/eldday/" target="_blank">**Linkedin**</a> | <a href="https://github.com/eldday" target="_blank">**Github**</a> 
 

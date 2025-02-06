@@ -64,11 +64,11 @@ try {
     <title><?php echo htmlspecialchars($profile['profile_name']); ?></title>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-style>
   /* Custom modal size */
+
   .modal-dialog {
-    max-width: 90%;  /* Make modal wider */
-    max-height: 90%;     /* Increase modal height */
+    max-width: 70%;  /* Make modal wider */
+    max-height: 80%;     /* Increase modal height */
         }
 
   .modal-content {
@@ -256,10 +256,10 @@ function handleLogout() {
               <?php endif; ?>
             </ul>
             <button id="addUpdateButton" type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#modal" style="display: none;">Add/Update</button>
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
+	    <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
               <img src="images/gear2.png" height="25" width="25">
             </button>
-            <button type="button" class="btn btn-danger ms-2" id="logoutButton" style="display: none;" onclick="handleLogout()">
+	    <button type="button" class="btn btn-danger ms-2" id="logoutButton" style="display: none;" onclick="handleLogout()">
               Logout
             </button>
           </div>
@@ -287,6 +287,7 @@ function handleLogout() {
    <br><br>           <iframe id="navmodal" src="system_info.php" width="100%" height="450" frameborder="0"></iframe>
             </div>
 		<div class="modal-footer">
+  		   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('pdfresume.php')" data-tooltip="Create PDF Resume">PDF Resume</button>
   		   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('config.php')" data-tooltip="Configure database connection.">Config</button>
 	    	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('accounts.php')" data-tooltip="Manage user accounts">Accounts</button>
 	  	   <button type="button" class="btn btn-secondary tooltip-button" onclick="updateIframe('profiles.php')" data-tooltip="Edit profile details">Profile</button>
@@ -304,13 +305,10 @@ function handleLogout() {
           function updateIframe(src) {
             document.getElementById('navmodal').src = src;
           }
+
         </script>
 
       <!-- Login Modal -->
-<script>
-.modal-body {
-        box-sizing: border-box;
-        }
 
 </script>
       <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

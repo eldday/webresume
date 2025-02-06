@@ -118,11 +118,10 @@ if (isset($_POST['add_job'])) {
             display: flex;
             font-family: Arial, sans-serif;
         }
-	.details {
-	width: 70%;
-	padding: 10px;
-
-	}
+        .details {
+            width: 70%;
+            padding: 10px;
+        }
         .sidebar {
             width: 20%;
             padding: 10px;
@@ -159,14 +158,17 @@ if (isset($_POST['add_job'])) {
         }
         ul li {
             margin: 5px 0;
+        }
+        textarea {
+            display: block; /* Ensure the textarea is visible initially */
+        }
     </style>
 </head>
 <body>
     <?php echo $message; ?>
 
     <div class="list">
-<link rel="stylesheet" href="css/modal-style.css">
-        <h2 style="background color:#93a1a9">Job History</h2>
+        <h2>Job History</h2>
         <ul>
             <?php foreach ($records as $recordItem): ?>
                 <li>
@@ -181,8 +183,7 @@ if (isset($_POST['add_job'])) {
     <div class="details">
         <!-- Edit Job Form -->
         <?php if ($record): ?>
-<hr style="height:3px;border-width:0;color:white;background-color:blue">
-            <h2 style="background color:#93a1a9">Edit Job</h2>
+            <h2>Edit Job</h2>
             <form method="POST">
                 <input type="hidden" name="job_id" value="<?php echo htmlspecialchars($record['job_id']); ?>">
 
@@ -202,20 +203,19 @@ if (isset($_POST['add_job'])) {
                 <label for="job_description">Job Description:</label>
                 <textarea id="job_description" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>
 
-              <label for="Start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" required>
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" value="<?php echo htmlspecialchars($record['start_date']); ?>" required>
 
-              <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" value="<?php echo htmlspecialchars($record['end_date']); ?>" required>
 
-	        <button type="submit">Update</button>
-	</form>
+                <button type="submit">Update</button>
+            </form>
         <?php endif; ?>
 
         <!-- Add New Job -->
-<hr style="height:3px;border-width:0;color:white;background-color:blue">
-        <h2 style="background color:#93a1a9">Add New Job</h2>
-        <form method="POST">
+        <h2>Add New Job</h2>
+        <form id="add-job-form" method="POST">
             <label for="company_id_new">Company:</label>
             <select id="company_id_new" name="company_id" required>
                 <?php foreach ($companies as $company): ?>
@@ -228,14 +228,14 @@ if (isset($_POST['add_job'])) {
             <label for="job_title_new">Job Title:</label>
             <input type="text" id="job_title_new" name="job_title" required>
 
-            <label for="job_description_new">Job Description:</label>
-            <textarea id="job_description_new" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>
+           <label for="job_description">Job Description:</label>
+           <textarea id="job_description" name="job_description" required><?php echo htmlspecialchars($record['job_description']); ?></textarea>  
 
-              <label for="start_date">Start_date:</label>
-                <input type="date" id="start_date" name="start_date" required>
+            <label for="start_date_new">Start Date:</label>
+            <input type="date" id="start_date_new" name="start_date" required>
 
-              <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" required>
+            <label for="end_date_new">End Date:</label>
+            <input type="date" id="end_date_new" name="end_date" required>
 
             <button type="submit" name="add_job">Add Job</button>
         </form>
@@ -243,10 +243,23 @@ if (isset($_POST['add_job'])) {
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Initialize CKEditor on the job_description fields
             ['job_description', 'job_description_new'].forEach(id => {
                 let field = document.getElementById(id);
                 if (field) {
-                    ClassicEditor.create(field).catch(error => console.error(error));
+                    ClassicEditor.create(field).then(editor => {
+                        // After initialization, hide the textarea
+                        field.style.display = 'hidden';
+                    }).catch(error => console.error(error));
+                }
+            });
+
+            // Ensure form submission only proceeds when CKEditor is initialized
+            document.getElementById("add-job-form").addEventListener("submit", function (event) {
+                // Check if CKEditor is initialized before form submission
+                if (!CKEDITOR.instances['job_description_new']) {
+                    event.preventDefault();
+                    alert("Please wait for CKEditor to initialize.");
                 }
             });
         });
