@@ -12,6 +12,7 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.
 * The configured database connection can be managed through the admin portal, using this mechanism one can change the configured database to one that contains different information this might be useful to have multiple variant databases created that tailor the information to a specific industyry or type of role. As an example you can have one database for individual contributor type roles , and one for leadership type roles, or even different industries altogether. 
+* Once all all information is entered, you can also generate a PDF Resume based on all the information entered in the various tabs of the admin modal.
 
 ---
 
@@ -84,13 +85,14 @@ This includes indicating the category the skill should be associated with.
 ## Skills tab in Admin Modal
 ![Skills in Modal](images/example-admin-skills-modal.png)
 
-## Generate Resume as a PDF in Admin Modal
+## PDF Resume in Admin Modal
 **Create a PDF resume**
 Both FPDF and DOMPDF libraries are present; however, only DOMPDF is available from the admin modal. 
 This is because it was easier to retain the HTML formatting of the job description field which looks better than the others.
 
 ![Create PDF Resume](images/example_pdf_resume_admin_modal.png)
 
+## Sample PDF Resume output
 The generated PDF resume looks similar to the following:
 
 ![Example PDF Resume](images/example_pdf_resume.png)
