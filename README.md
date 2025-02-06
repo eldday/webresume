@@ -183,18 +183,14 @@ The included backup of the database has the following:
 
 ``` mysql -u [user name] -p [targer db name] < webresume.sql ```
 
-> at least one admin account defined in the User_accounts table with admin access
+> Copy everything in your repo dir to the web server root directory 
+``` sudo cp -fr ~/sourcedir /var/www/html/  ```
 
+>Set the appropriate permissions for the utilities and images folders
 ```
-	INSERT into USER_ACCOUNTS (username, password, accessLevel) VALUES ($username,$password, $accessLevel);
+sudo chown -R www-data:www-data /var/www/html/utilities/
+sudo chown -R www-data:www-data /var/www/html/images/
 ```
-> run the hasher script to encrpt the intitial admin password in the database
-
-```
-	cd utilities
-	./hasher.php [enter]
-```
-
 > Start the Apache2 and MySQL services 
 
 ``` 
