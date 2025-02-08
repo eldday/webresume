@@ -1,3 +1,4 @@
+
 <?php
 require 'vendor/autoload.php';
 
@@ -53,9 +54,9 @@ $html = '
             <style>
                 body { font-family: Arial, sans-serif; }
                 h1 { text-align: center; }
-                .job-history { margin-bottom: 20px; }
-                .job-title { font-weight: bold; }
-                .job-description { margin-left: 20px; }
+                .job-history { margin-bottom: 10px; }
+                .job-title { font-size: 120%; font-weight: bold; }
+                .job-description { margin-left: 0px; }
             </style>
         </head>
         <body>
@@ -69,24 +70,86 @@ $html = '
             <div class="job-history">
                 <h2>Job History</h2>';
 
-//foreach ($job_history as $job) {
-//    $html .= '<p class="job-title">' . $job['job_title'] . ' at ' . $job['company_name'] . '</p>';
-//    $html .= '<p><strong>' . 'From: ' . '</strong>' . $job['start_date'] . ' To: ' . $job['end_date'] . '</p>';
-//    $html .= '<p class="job-description">Description: ' . $job['job_description'] . '</p>';
-//}
+$html = '
+    <html>
+        <head>
+            <style>
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 0; 
+                    padding: 0;
+                    line-height: 1.2; /* Reduce line height */
+                }
+                h1 { 
+                    text-align: center; 
+                    margin: 10px 0; /* Reduced margin */
+                }
+                p { 
+                    margin: 5px 0; /* Reduced margin between paragraphs */
+                    font-size: 12px; /* Slightly smaller font size */
+                }
+                .job-history { 
+                    margin-bottom: 15px; /* Reduced margin between job sections */
+                }
+                .job-title { 
+                    font-size: 110%; 
+                    font-weight: bold;
+                    margin: 5px 0; /* Reduced margin */
+                }
+                .job-description { 
+                    margin-left: 0px; 
+                    font-size: 12px; /* Slightly smaller font size for description */
+                }
+                hr {
+                    border: 0; 
+                    border-top: 1px solid #000; 
+                    margin: 10px 0; /* Reduced margin for horizontal line */
+                }
+                .contact-info {
+                    font-size: 12px;
+                    margin: 5px 0; /* Reduced margin between contact fields */
+                }
+            </style>
+        </head>
+        <body>
+            <h1>' . htmlspecialchars($profile['profile_name']) . '</h1>
+            <p><center><strong>' . htmlspecialchars($profile['profile_description'] ?? 'No description available') . '</strong></center></p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> ' . htmlspecialchars($profile['email_address'] ?? 'N/A') . '</p>
+                <p><strong>GitHub:</strong> <a href="' . htmlspecialchars($profile['github_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['github_url'] ?? 'N/A') . '</a></p>
+                <p><strong>LinkedIn:</strong> <a href="' . htmlspecialchars($profile['linkedin_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['linkedin_url'] ?? 'N/A') . '</a></p>
+                <p><strong>Website:</strong> <a href="' . htmlspecialchars($profile['website_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['website_url'] ?? 'N/A') . '</a></p>
+            </div>
+
+            <div class="job-history">
+                <h2>Job History</h2>';
+
+$last_company = null;
 
 foreach ($job_history as $job) {
    $start_date = DateTime::createFromFormat('Y-m-d', $job['start_date'])->format('m/Y');
    $end_date = DateTime::createFromFormat('Y-m-d', $job['end_date'])->format('m/Y');
 
+   // Add horizontal line when the company changes
+   if ($last_company !== $job['company_name']) {
+       if ($last_company !== null) {
+           $html .= '<hr>';
+       }
+       $last_company = $job['company_name'];
+   }
+
+   // Job Title and Company
    $html .= '<div style="display: flex; justify-content: space-between; align-items: center;">
                 <p class="job-title" style="margin: 0; flex-grow: 1;">' . htmlspecialchars($job['job_title']) . ' at ' . htmlspecialchars($job['company_name']) . '</p>
                 <p style="text-align: right; margin: 0;"><strong>From: </strong>' . $start_date . ' <strong>To: </strong>' . $end_date . '</p>
               </div>';
-   $html .= '<p class="job-description">Description:' . $job['job_description'] . '</p>';
+
+   // Use htmlspecialchars_decode to preserve HTML formatting in job description
+   $html .= '<p class="job-description">' . htmlspecialchars_decode($job['job_description']) . '</p>';
 }
 
 $html .= '</div>';
+
 $html .= '<h2>Skills</h2>';
 
 foreach ($skills as $category => $items) {
@@ -94,6 +157,51 @@ foreach ($skills as $category => $items) {
 }
 
 $html .= '</body></html>';
+
+//foreach ($job_history as $job) {
+//   $start_date = DateTime::createFromFormat('Y-m-d', $job['start_date'])->format('m/Y');
+//   $end_date = DateTime::createFromFormat('Y-m-d', $job['end_date'])->format('m/Y');
+
+//   $html .= '<div style="display: flex; justify-content: space-between; align-items: center;">
+//                <p class="job-title" style="margin: 0; flex-grow: 1;">' . htmlspecialchars($job['job_title']) . ' at ' . htmlspecialchars($job['company_name']) . '</p>
+//                <p style="text-align: right; margin: 0;"><strong>From: </strong>' . $start_date . ' <strong>To: </strong>' . $end_date . '</p>
+//              </div>';
+//   $html .= '<p class="job-description">Description:' . $job['job_description'] . '</p>';
+//   $html .= '<hr style="border: 1px solid #000; margin-top: 10px; margin-bottom: 10px;">';
+//$last_company = null;  // Initialize a variable to track the last company
+
+//foreach ($job_history as $job) {
+   // Format the start and end dates
+//   $start_date = DateTime::createFromFormat('Y-m-d', $job['start_date'])->format('m/Y');
+//   $end_date = DateTime::createFromFormat('Y-m-d', $job['end_date'])->format('m/Y');
+   
+   // Check if the company has changed
+//   if ($last_company !== $job['company_name']) {
+       // If it's a new company, and it's not the first company, add a horizontal line
+ //      if ($last_company !== null) {
+//           $html .= '<hr style="border: 1px solid #000; margin-top: 10px; margin-bottom: 10px;">';
+//       }
+       // Update the last_company to the current one
+//       $last_company = $job['company_name'];
+//   }
+
+   // Add the job details for the current company
+//   $html .= '<div style="display: flex; justify-content: space-between; align-items: center;">
+//                <p class="job-title" style="margin: 0; flex-grow: 1;">' . htmlspecialchars($job['job_title']) . ' at ' . htmlspecialchars($job['company_name']) . '</p>
+//                <p style="text-align: right; margin: 0;"><strong>From: </strong>' . $start_date . ' <strong>To: </strong>' . $end_date . '</p>
+//              </div>';
+//   $html .= '<p class="job-description">Description:' . $job['job_description'] . '</p>';
+//}
+
+
+//$html .= '</div>';
+//$html .= '<h2>Skills</h2>';
+
+//foreach ($skills as $category => $items) {
+//    $html .= '<p><strong>' . htmlspecialchars($category) . ':</strong> ' . implode(', ', array_map('htmlspecialchars', $items)) . '</p>';
+//}
+
+//$html .= '</body></html>';
 
 // Load the HTML content
 $dompdf->loadHtml($html);
