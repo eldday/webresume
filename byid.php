@@ -136,7 +136,7 @@ if ($company_id && is_numeric($company_id)) {
   height: 30px;
 background-image: linear-gradient(to right, grey , white);}
 </style>
-	<div id="grad1"><font color="white"><h2><I>&nbsp; Positions held at <?php echo ($company_name);?></I></h2></font></style></dov>
+	<div id="grad1"><font color="white"><h2><I>&nbsp; Positions held at <?php echo ($company_name);?></I></h2></font></style></div>
             <?php if (!empty($jobs)): ?>
                 <?php foreach ($jobs as $job): ?>
                     <div class="job-item">

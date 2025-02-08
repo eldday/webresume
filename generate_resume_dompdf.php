@@ -4,19 +4,6 @@ require 'vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 require 'utilities/db_connection.php';
-// Database connection
-//$host = 'localhost';
-//$dbname = 'resume';
-//$username = 'pday';
-//$password = 'quality';
-
-//// Create a PDO instance
-//try {
-//    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-//    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//} catch (PDOException $e) {
-//    die("Could not connect to the database: " . $e->getMessage());
-//}
 
 // Fetch profile
 function getProfile($profile_id) {
@@ -73,25 +60,37 @@ $html = '
         </head>
         <body>
             <h1>' . htmlspecialchars($profile['profile_name']) . '</h1>
-            <p><strong>' . htmlspecialchars($profile['profile_description']) . '</strong></p>
-            <p><strong>Email:</strong> ' . htmlspecialchars($profile['email_address']) . '</p>
-            <p><strong>GitHub:</strong> <a href="' . htmlspecialchars($profile['github_url']) . '" target="_blank">' . htmlspecialchars($profile['github_url']) . '</a></p>
-            <p><strong>LinkedIn:</strong> <a href="' . htmlspecialchars($profile['linkedin_url']) . '" target="_blank">' . htmlspecialchars($profile['linkedin_url']) . '</a></p>
-            <p><strong>Website:</strong> <a href="' . htmlspecialchars($profile['website_url']) . '" target="_blank">' . htmlspecialchars($profile['website_url']) . '</a></p>
+            <p><center><strong>' . htmlspecialchars($profile['profile_description'] ?? 'No description available') . '</strong></center></p>
+            <p><strong>Email:</strong> ' . htmlspecialchars($profile['email_address'] ?? 'N/A') . '</p>
+            <p><strong>GitHub:</strong> <a href="' . htmlspecialchars($profile['github_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['github_url'] ?? 'N/A') . '</a></p>
+            <p><strong>LinkedIn:</strong> <a href="' . htmlspecialchars($profile['linkedin_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['linkedin_url'] ?? 'N/A') . '</a></p>
+            <p><strong>Website:</strong> <a href="' . htmlspecialchars($profile['website_url'] ?? '#') . '" target="_blank">' . htmlspecialchars($profile['website_url'] ?? 'N/A') . '</a></p>
 
             <div class="job-history">
                 <h2>Job History</h2>';
 
+//foreach ($job_history as $job) {
+//    $html .= '<p class="job-title">' . $job['job_title'] . ' at ' . $job['company_name'] . '</p>';
+//    $html .= '<p><strong>' . 'From: ' . '</strong>' . $job['start_date'] . ' To: ' . $job['end_date'] . '</p>';
+//    $html .= '<p class="job-description">Description: ' . $job['job_description'] . '</p>';
+//}
+
 foreach ($job_history as $job) {
-    $html .= '<p class="job-title">' . $job['job_title'] . ' at ' . $job['company_name'] . '</p>';
-    $html .= '<p>From: ' . $job['start_date'] . ' To: ' . $job['end_date'] . '</p>';
-    $html .= '<p class="job-description">Description: ' . $job['job_description'] . '</p>';
+   $start_date = DateTime::createFromFormat('Y-m-d', $job['start_date'])->format('m/Y');
+   $end_date = DateTime::createFromFormat('Y-m-d', $job['end_date'])->format('m/Y');
+
+   $html .= '<div style="display: flex; justify-content: space-between; align-items: center;">
+                <p class="job-title" style="margin: 0; flex-grow: 1;">' . htmlspecialchars($job['job_title']) . ' at ' . htmlspecialchars($job['company_name']) . '</p>
+                <p style="text-align: right; margin: 0;"><strong>From: </strong>' . $start_date . ' <strong>To: </strong>' . $end_date . '</p>
+              </div>';
+   $html .= '<p class="job-description">Description:' . $job['job_description'] . '</p>';
 }
 
+$html .= '</div>';
 $html .= '<h2>Skills</h2>';
 
 foreach ($skills as $category => $items) {
-    $html .= '<p><strong>' . $category . ':</strong> ' . implode(', ', $items) . '</p>';
+    $html .= '<p><strong>' . htmlspecialchars($category) . ':</strong> ' . implode(', ', array_map('htmlspecialchars', $items)) . '</p>';
 }
 
 $html .= '</body></html>';
@@ -106,5 +105,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF (force download)
-$dompdf->stream('resume_dompdf.pdf');
+$dompdf->stream(htmlspecialchars($profile['profile_name']) . '-resume-as-pdf.pdf');
 ?>
