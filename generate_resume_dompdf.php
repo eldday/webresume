@@ -168,5 +168,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF (force download)
-$dompdf->stream(htmlspecialchars($profile['profile_name']) . '-resume-as-pdf.pdf');
+$dompdf->stream(htmlspecialchars($profile['profile_name']) . '-resume.pdf');
 ?>
