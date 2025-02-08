@@ -37,7 +37,7 @@ The main interface to add all resume details is the Admin modal, which has butto
 
 
 ## Administrator Modal
-![Admin Modal](images/example-admin-modal.png)
+![Admin Modal](images/example-admin-system-info-modal.png)
 
 ### 1. **Config**
 **Update database connection details** 
