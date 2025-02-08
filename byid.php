@@ -123,13 +123,20 @@ if ($company_id && is_numeric($company_id)) {
     <div class="container">
         <!-- Company info and logo column -->
         <div class="company-info">
+	   
             <?php if ($company_logo): ?>
                 <img src="images/<?php echo htmlspecialchars($company_logo); ?>" alt="Company Logo" class="company-logo" onclick="openModal()">
-            <?php endif; ?>
+	    <?php endif; ?>
         </div>
 
         <!-- Job listings column -->
         <div class="job-list">
+<style>
+#grad1 {
+  height: 30px;
+background-image: linear-gradient(to right, grey , white);}
+</style>
+	<div id="grad1"><font color="white"><h2><I>&nbsp; Positions held at <?php echo ($company_name);?></I></h2></font></style></dov>
             <?php if (!empty($jobs)): ?>
                 <?php foreach ($jobs as $job): ?>
                     <div class="job-item">
