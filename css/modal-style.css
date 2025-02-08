@@ -94,3 +94,7 @@ background-color:#6c6f70;
             color: red;
             font-weight: bold;
         }
+   .company-logo {
+            width: 400px;
+            height: 300px;
+        }
