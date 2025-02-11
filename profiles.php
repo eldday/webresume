@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate required fields
     if (empty($profile_name) || empty($profile_description)) {
-        $message = "Name and description cannot be empty.";
+        $message = "Name and Description cannot be empty.";
     }
 
     // Handle file upload if a new background image is provided
@@ -117,35 +117,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <title>Companies</title>
     <style>
+        textarea {
+          display: none; /* Hide textarea initially, as it's replaced by CKEditor */
+        }
+
         body {
             display: flex;
             font-family: Arial, sans-serif;
-        }
-        .list {
-            width: 20%;
-            border-right: 1px solid #ccc;
-            padding: 10px;
-        }
-        .list ul {
-            list-style: none;
-            padding: 0;
-        }
-        .list ul li {
-            margin: 5px 0;
-        }
-        .list ul li a {
-            text-decoration: none;
-            color: blue;
+            border-right: 4px solid #ccc;
         }
         .details {
             width: 80%;
+            padding: 20px;
+            margint-right: 20px;
+            margin-left: 20px;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            border-right: 4px solid #ccc;
+            border-left: 4px solid #ccc;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 5px;
+        }
+        .user-list {
+            list-style: none;
+            padding: 5;
+        }
+        .user-list li {
+            margin-bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.059);
+            border: solid #ffffff1f 0.75pt;
+            border-width: 15 15 1px 0; /* Bottom border only */
+            line-height: 1.2;
+            margin-bottom: 5px;
+            padding: 6pt 4pt;
+            text-indent: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .list {
+            width: 25%;
+            border-right: 2px solid #ccc;
+            border-left: 2px solid #ccc;
             padding: 10px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        ul {
+            list-style: none;
+            padding: 0;
         }
+        ul li {
+            margin: 5px 0;
+        }
+        textarea {
+            display: block; /* Ensure the textarea is visible initially */
+           margin: 10px;
+       }
     </style>
 </head>
 <body>
@@ -174,9 +203,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <?php if (!empty($message)): ?>
-            <p style="color: red;"><?php echo htmlspecialchars($message); ?></p>
+            <h2><p style="color: red; background-color: #dfa8bb;"><?php echo htmlspecialchars($message); ?></p></h2>
         <?php elseif (isset($_GET['success'])): ?>
-            <p style="color: green;">Record saved successfully!</p>
+            <h2><p style="color: green;background-color: #afcca2;">Record saved successfully!</p></h2>
         <?php endif; ?>
 
         <form method="POST" action="" enctype="multipart/form-data">

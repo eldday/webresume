@@ -5,10 +5,8 @@ session_start();
 if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
     http_response_code(403);
     echo "Access Denied!";
-
-   exit();
+    exit();
 }
-
 
 // Include database connection
 require_once 'utilities/db_connection.php';
@@ -41,14 +39,14 @@ if (isset($_GET['user_id'])) {
 }
 
 // Handle form submission for creating/updating a user
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['user_id'] ?? null;
     $username = $_POST['username'] ?? null;
     $password = $_POST['password'] ?? '';
     $access_level = $_POST['access_level'] ?? null;
 
     if (!$username || !$access_level) {
-        $message = "Username and Access Level are required.";
+        $message = '<h2><p style="color: red; background-color:  #dfa8bb; padding: 5px;">Username and Access Level are required.</p></h2>';
     } else {
         try {
             if ($id) {
@@ -72,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
                         ':id' => $id
                     ]);
                 }
-                $message = "User updated successfully.";
+                $message = '<h2><p style="color: green; background-color: #afcca2; padding: 5px;">User updated successfully.</p></h2>';
             } else {
                 // Create new user
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -82,14 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
                     ':password' => $hashedPassword,
                     ':access_level' => $access_level
                 ]);
-                $message = "User created successfully.";
+                $message = '<h2><p style="color: green; background-color: #afcca2; padding: 5px;">User created successfully!</p></h2>';
             }
 
             // Refresh the user list after update or creation
             $stmt = $pdo->query('SELECT id, username, access_level FROM users');
             $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $message = "Error: " . $e->getMessage();
+        } catch (PDOException $e) { 
+           $message = '<h2><p style="color: red; background-color: #dfa8bb; padding: 5px;">Error: ' . $e->getMessage() . '</p></h2>';
         }
     }
 }
@@ -101,44 +99,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
+    <link rel="stylesheet" href="css/modal-style.css">
     <style>
         body {
             display: flex;
             font-family: Arial, sans-serif;
-        }
-        .list {
-            width: 20%;
-            border-right: 1px solid #ccc;
-            padding: 10px;
-        }
-        .list ul {
-            list-style: none;
-            padding: 0;
-        }
-        .list ul li {
-            margin: 5px 0;
-        }
-        .list ul li a {
-            text-decoration: none;
-            color: blue;
+            border-right: 4px solid #ccc;
         }
         .details {
             width: 80%;
-            padding: 10px;
+            padding: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            border-right: 4px solid #ccc;
+            border-left: 4px solid #ccc;
+        }
+        .user-list {
+            list-style: none;
+            padding: 5;
+        }
+        .user-list li {
+            margin-bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.059);
+            border: solid #ffffff1f 0.75pt;
+            border-width: 15 15 1px 0; /* Bottom border only */
+            line-height: 1.2;
+            padding: 6pt 4pt;
+            text-indent: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        textarea {
+            display: block; /* Ensure textarea is visible initially */
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-<link rel="stylesheet" href="css/modal-style.css">
-    <div class="list">
+    <div class="sidebar">
         <h2>Existing Users</h2>
         <ul class="user-list">
-<link rel="stylesheet" href="css/modal-style.css">
             <?php foreach ($users as $user): ?>
                 <li>
                     <a href="?user_id=<?php echo $user['id']; ?>">
@@ -149,13 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
         </ul>
     </div>
     <div class="details">
-	<link rel="stylesheet" href="css/modal-style.css">
-         <hr style="height:3px;border-width:0;color:white;background-color:blue">
-	<h2>User Management</h2>
-
+        <hr style="height:3px;border-width:0;color:white;background-color:blue">
         <?php if (!empty($message)): ?>
-            <p><?php echo htmlspecialchars($message); ?></p>
+            <div class="message"><?php echo $message; ?></div>
         <?php endif; ?>
+        <h2>User Management</h2>
 
         <form action="" method="post">
             <input type="hidden" name="user_id" value="<?php echo $selectedUser['id'] ?? ''; ?>">
@@ -169,8 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['user_id'])) {
             <label for="access_level">Access Level:</label><br>
             <select id="access_level" name="access_level" required>
                 <option value="admin" <?php echo (isset($selectedUser['access_level']) && $selectedUser['access_level'] === 'admin') ? 'selected' : ''; ?>>Admin</option>
-                <option value="user" <?php echo (isset($selectedUser['access_level']) && $selectedUser['access_level'] === 'user') ? 'selected' : ''; ?>>User</option>
-                <option value="guest" <?php echo (isset($selectedUser['access_level']) && $selectedUser['access_level'] === 'guest') ? 'selected' : ''; ?>>Guest</option>
+                <option value="View" <?php echo (isset($selectedUser['access_level']) && $selectedUser['access_level'] === 'View') ? 'selected' : ''; ?>>View</option>
             </select><br><br>
 
             <button type="submit">Save</button>
