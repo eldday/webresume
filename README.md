@@ -121,7 +121,6 @@ The generated PDF resume looks similar to the following:
 > For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
 
 ---
-
 * [Debian Apache PHP MariaDB Install](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10/)
 
 * [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
@@ -129,39 +128,38 @@ The generated PDF resume looks similar to the following:
 * [Fedora LAMP Installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
 
 * [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
-
 ---
+
 ### Windows Installation
-Windows is not fun to get setup and working with apache2, PHP, and MySQL/MariaDB
-The first two steps are the most important 
+
+> Windows is not fun to get setup and working with apache2, PHP, and MySQL/MariaDB
+> The first few steps are the most important 
 
 #### Step 1 if you have IIS installed, remove it. 
 
-#### Step 2 Install Chocolatey 
+#### Step 2 Install Apache2 using an archive from here 
+* [Apache Lounge](https://www.apachelounge.com/download/)
+
+#### Step 3 Install Chocolatey 
 * [Chocolatey](https://docs.chocolatey.org/en-us/)
 
 Then you can use it to install many of the components you will need
 from powershell prompt as an example:
 
 ```
-choco install PHP libapache2-mod-php php-mysql
+choco install libapache2-mod-php
+choco install awk 4.2.132
+choco install git 2.47.1.20250115
+choco install mariadb.install 11.6.2
+choco install mysql 9.2.0
+choco install netstat-agent 3.6.0
+choco install openssh 8.0.0.1
+choco install php 8.4.3
+choco install phpmyadmin 5.1.3
+choco install libapache2-mod-php
 
-Here is a list of things i was able to quickly install 
-- awk 4.2.132
-- chocolatey-compatibility.extension 1.0.0
-- chocolatey-core.extension 1.4.0
-- chocolatey-windowsupdate.extension 1.0.5
-- dnscontrol 2.9.0
-- git 2.47.1.20250115
-- git.install 2.47.1.20250115
-- KB2919355 1.0.20160915
-- mariadb.install 11.6.2
-- mysql 9.2.0
-- netstat-agent 3.6.0
-- openssh 8.0.0.1
-- php 8.4.3
-- phpmyadmin 5.1.3
 ```
+
 
 #### Debian Linux
 
@@ -176,9 +174,11 @@ sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
 change the following section to show index.php first
 
-```<IfModule mod_dir.c>
+```
+<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
+
 ```
 
 > Access project root
