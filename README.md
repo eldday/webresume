@@ -157,9 +157,71 @@ choco install openssh 8.0.0.1
 choco install php 8.4.3
 choco install phpmyadmin 5.1.3
 choco install libapache2-mod-php
+```
+> Edit your httpd.Conf file
+```
+these are enaled in my windows instance:
+
+LoadModule actions_module modules/mod_actions.so
+LoadModule alias_module modules/mod_alias.so
+LoadModule allowmethods_module modules/mod_allowmethods.so
+LoadModule asis_module modules/mod_asis.so
+LoadModule auth_basic_module modules/mod_auth_basic.so
+LoadModule authn_core_module modules/mod_authn_core.so
+LoadModule authn_file_module modules/mod_authn_file.so
+LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+LoadModule authz_host_module modules/mod_authz_host.so
+LoadModule authz_user_module modules/mod_authz_user.so
+LoadModule autoindex_module modules/mod_autoindex.so
+LoadModule cgi_module modules/mod_cgi.so
+LoadModule dir_module modules/mod_dir.so
+LoadModule env_module modules/mod_env.so
+LoadModule include_module modules/mod_include.so
+LoadModule info_module modules/mod_info.so
+LoadModule isapi_module modules/mod_isapi.so
+LoadModule log_config_module modules/mod_log_config.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule negotiation_module modules/mod_negotiation.so
+LoadModule setenvif_module modules/mod_setenvif.so
+LoadModule status_module modules/mod_status.so
+```
+> and i added this at the bottom of the file:
+
+```
+LoadModule php_module "c:/php/php8apache2_4.dll"
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
+# configure the path to php.ini
+PHPIniDir "C:/php"
 
 ```
 
+> Edit your php.ini file
+
+```
+enable extensions:
+
+extension=mbstring
+extension=exif     
+extension=mysqli
+extension=pdo_mysql
+
+[Pdo_mysql]
+ pdo_mysql.default_socket=
+
+[MBString]
+  mbstring.http_output =
+  mbstring.internal_encoding = UTF-8
+	
+[MySQLi]
+ mysqli.default_pw =
+ mysqli.default_user =
+ mysqli.default_host =
+ mysqli.default_socket =
+
+```
 
 #### Debian Linux
 
@@ -171,8 +233,9 @@ sudo apt install apache2
 sudo apt install mariadb-server
 sudo apt install php libapache2-mod-php php-mysql
 sudo nano /etc/apache2/mods-enabled/dir.conf
+
 ```
-change the following section to show index.php first
+> change the following section to show index.php first
 
 ```
 <IfModule mod_dir.c>
@@ -189,9 +252,9 @@ update the utilities/db_connecttion.php script to match your database installati
 change the owner and group for the utilities directory, and the images directory
 the owner must be set the same as the http server uses (apache2 , nginx, etc...)
 
-```
-Replace the empty variables for:
+> Replace the empty variables for:
 
+```
  	Host
 	DB Name
 	Username
