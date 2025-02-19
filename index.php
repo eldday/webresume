@@ -5,7 +5,7 @@ session_start();
 define('ADMIN_REDIRECT_ENABLED', true); // Change this to false to disable redirection
 
 // Ensure admin redirection happens only after login verification
-if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['accessLevel'] === 'admin' && basename($_SERVER['PHP_SELF']) !== 'admindex.php') {
+if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['accessLevel'] === 'admin' && basename($_SERVER['PHP_SELF']) !== 'index.php') {
     header("Location: admindex.php"); // Redirect to admin page if logged in as admin
     exit();
 }
@@ -351,6 +351,4 @@ async function handleLogin(event) {
      </main>
   </body>
 </html>
-    </main>
-  </body>
-</html>
+

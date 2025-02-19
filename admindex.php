@@ -108,6 +108,7 @@ try {
             margin-left: 250px; /* Avoid sidebar overlap */
             width: calc(100% - 250px);
             height: 100vh;
+	    background-color: #FFF;
         }
     </style>
     <script>
@@ -240,7 +241,7 @@ try {
 
         <!-- Main Content Area -->
         <div class="w-100 p-3" id="nav-space">
-            <iframe id="nav" src="base.php" width="100%" height="100%" scrolling="no" onload="resizeIframe(this)"></iframe>
+            <iframe id="nav" src="system_info.php" width="100%" height="100%" scrolling="yes" onload="resizeIframe(this)"></iframe>
         </div>
 
         <!-- Login Modal -->
