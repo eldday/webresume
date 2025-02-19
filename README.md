@@ -39,6 +39,9 @@ The main interface to add all resume details is the Admin modal, which has butto
 ## Administrator Modal
 ![Admin Modal](images/example-admin-system-info-modal.png)
 
+## Administrator Page (alternate config)
+![Administrator Page](images/example-admin-page.png) 
+
 ### 1. **Config**
 **Update database connection details** 
 The configuration for connecting to the database can be updated here, including selecting the target database from a drop-down of existing databases, as well as the username and password that connects to the host. The host configuration has been excluded from this configuration screen
