@@ -135,7 +135,39 @@ The generated PDF resume looks similar to the following:
 
 ---
 
-#### Debin Linux
+### Windows Installation
+Windows is not fun to get setup and working with apache2, PHP, and MySQL/MariaDB
+The first two steps are the most important 
+
+#### Step 1 if you have IIS installed, remove it. 
+
+#### Step 2 Install Chocolatey 
+* [Chocolatey](https://docs.chocolatey.org/en-us/)
+
+Then you can use it to install many of the components you will need
+from PowerShell prompt as an example:
+
+```
+choco install PHP libapache2-mod-php php-mysql
+
+Here is a list of things i was able to quickly install 
+- awk 4.2.132
+- chocolatey-compatibility.extension 1.0.0
+- chocolatey-core.extension 1.4.0
+- chocolatey-windowsupdate.extension 1.0.5
+- dnscontrol 2.9.0
+- git 2.47.1.20250115
+- git.install 2.47.1.20250115
+- KB2919355 1.0.20160915
+- mariadb.install 11.6.2
+- mysql 9.2.0
+- netstat-agent 3.6.0
+- openssh 8.0.0.1
+- php 8.4.3
+- phpmyadmin 5.1.3
+```
+
+#### Debian Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
 
@@ -157,7 +189,7 @@ change the following section to show index.php first
 
 ``` cd /sourcedir  ```
 
-update the utilities/db_connecttion script to match your database installation
+update the utilities/db_connecttion.php script to match your database installation
 change the owner and group for the utilities directory, and the images directory
 the owner must be set the same as the http server uses (apache2 , nginx, etc...)
 
@@ -216,11 +248,10 @@ sudo chown -R www-data:www-data /var/www/html/images/
 * *[PHP](https://www.php.net/downloads.php)*
 * *[Apache Server](https://httpd.apache.org/)*
 * *[Composer](https://getcomposer.org/)*
-* 	*[DomPDF](https://packagist.org/packages/dompdf/dompdf)*
-*	*[FPDF](https://packagist.org/packages/setasign/fpdf)*
+* *[DomPDF](https://packagist.org/packages/dompdf/dompdf)*
+* *[FPDF](https://packagist.org/packages/setasign/fpdf)*
 
 ---
-
 > ![](https://github.com/eldday/webresume/blob/main/images/DDAYLOGO.gif) Patrick Day  | <a href="https://www.linkedin.com/in/eldday/" target="_blank">**Linkedin**</a> | <a href="https://github.com/eldday" target="_blank">**Github**</a> 
 
 ---
