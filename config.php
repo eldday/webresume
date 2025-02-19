@@ -44,15 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $configPath = 'utilities/db_connection.php';
         if (is_writable(dirname($configPath))) {
             if (file_put_contents($configPath, $configContent) !== false) {
-                $message = "<p style='color: green;'>Database configuration updated successfully.</p>";
+                $message = "<p style='color: green; background-color: #afcca2;'>Database configuration updated successfully.</p>";
             } else {
-                $message = "<p style='color: red;'>Failed to update database configuration.</p>";
+                $message = "<p style='color: red; background-color: #dfa8bb;'>Failed to update database configuration.</p>";
             }
         } else {
-            $message = "<p style='color: red;'>Error: Configuration file directory is not writable. Check permissions.</p>";
+            $message = "<p style='color: red; background-color: #dfa8bb;'>Error: Configuration file directory is not writable. Check permissions.</p>";
         }
     } else {
-        $message = "<p style='color: red;'>All fields are required.</p>";
+        $message = "<p style='color: red; background-color: #dfa8bb;'>All fields are required.</p>";
     }
 }
 ?>
@@ -63,14 +63,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database Configuration</title>
+    <style>
+        textarea {
+          display: none; /* Hide textarea initially, as it's replaced by CKEditor */
+        }
+
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            border-right: 4px solid #ccc;
+        }
+        .details {
+            width: 80%;
+            padding: 20px;
+            margint-right: 20px;
+            margin-left: 20px;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            border-right: 4px solid #ccc;
+            border-left: 4px solid #ccc;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 5px;
+        }
+        .user-list {
+            list-style: none;
+            padding: 5;
+        }
+        .user-list li {
+            margin-bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.059);
+            border: solid #ffffff1f 0.75pt;
+            border-width: 15 15 1px 0; /* Bottom border only */
+            line-height: 1.2;
+            margin-bottom: 5px;
+            padding: 6pt 4pt;
+            text-indent: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .list {
+            width: 25%;
+            border-right: 2px solid #ccc;
+            border-left: 2px solid #ccc;
+            padding: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+        textarea {
+            display: block; /* Ensure the textarea is visible initially */
+           margin: 10px;
+       }
+    </style>
 </head>
 <body>
 <link rel="stylesheet" href="css/modal-style.css">
     <div class="main">
+	<h2><?php echo $message; ?></h2>
 <hr style="height:3px;border-width:0;color:white;background-color:blue">
         <h2>Update Database Configuration</h2>
         <p>Warning you are configuring the connection to the database if you accidentally  specify the wrong credentials or  database  the site will not run until you update db_connection.php from console!</p>
-        <?php echo $message; ?>
         <form method="post">
             <label>Database Name:</label>
             <select name="dbname" required>

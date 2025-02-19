@@ -11,8 +11,8 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The company logo is displayed to the left of your job history and is a link to a modal that presents the company description information
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.
-* The configured database connection can be managed through the admin portal, using this mechanism one can change the configured database to one that contains different information this might be useful to have multiple variant databases created that tailor the information to a specific industry or type of role. As an example you can have one database for individual contributor type roles , and one for leadership type roles, or even different industries altogether. 
-* Once all information is entered, you can also generate a PDF Resume based on all the information entered in the various tabs of the admin modal.
+* The configured database connection can be managed through the admin portal, using this mechanism one can change the configured database to one that contains different information this might be useful to have multiple variant databases created that tailor the information to a specific industyry or type of role. As an example you can have one database for individual contributor type roles , and one for leadership type roles, or even different industries altogether. 
+* Once all all information is entered, you can also generate a PDF Resume based on all the information entered in the various tabs of the admin modal.
 
 ---
 
@@ -121,6 +121,7 @@ The generated PDF resume looks similar to the following:
 > For other platform specific information regarding how to configure SSL or Apache with PHP you can try the following resources:
 
 ---
+
 * [Debian Apache PHP MariaDB Install](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10/)
 
 * [Ubuntu LAMP Installation](https://www.digitalocean.com/community/tutorials/how-to-install-lamp-stack-on-ubuntu)
@@ -128,102 +129,10 @@ The generated PDF resume looks similar to the following:
 * [Fedora LAMP Installation](https://www.linode.com/docs/guides/how-to-install-lamp-stack-on-fedora-alma-rocky-linux/)
 
 * [CentOS LAMP Installation](https://phoenixnap.com/kb/how-to-install-lamp-stack-on-centos)
+
 ---
 
-### Windows Installation
-
-> Windows is not fun to get setup and working with apache2, PHP, and MySQL/MariaDB
-> The first few steps are the most important 
-
-#### Step 1 if you have IIS installed, remove it. 
-
-#### Step 2 Install Apache2 using an archive from here 
-* [Apache Lounge](https://www.apachelounge.com/download/)
-
-#### Step 3 Install Chocolatey 
-* [Chocolatey](https://docs.chocolatey.org/en-us/)
-
-Then you can use it to install many of the components you will need
-from powershell prompt as an example:
-
-```
-choco install libapache2-mod-php
-choco install awk 4.2.132
-choco install git 2.47.1.20250115
-choco install mariadb.install 11.6.2
-choco install mysql 9.2.0
-choco install netstat-agent 3.6.0
-choco install openssh 8.0.0.1
-choco install php 8.4.3
-choco install phpmyadmin 5.1.3
-choco install libapache2-mod-php
-```
-> Edit your httpd.Conf file
-```
-these are enaled in my windows instance:
-
-LoadModule actions_module modules/mod_actions.so
-LoadModule alias_module modules/mod_alias.so
-LoadModule allowmethods_module modules/mod_allowmethods.so
-LoadModule asis_module modules/mod_asis.so
-LoadModule auth_basic_module modules/mod_auth_basic.so
-LoadModule authn_core_module modules/mod_authn_core.so
-LoadModule authn_file_module modules/mod_authn_file.so
-LoadModule authz_core_module modules/mod_authz_core.so
-LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
-LoadModule authz_host_module modules/mod_authz_host.so
-LoadModule authz_user_module modules/mod_authz_user.so
-LoadModule autoindex_module modules/mod_autoindex.so
-LoadModule cgi_module modules/mod_cgi.so
-LoadModule dir_module modules/mod_dir.so
-LoadModule env_module modules/mod_env.so
-LoadModule include_module modules/mod_include.so
-LoadModule info_module modules/mod_info.so
-LoadModule isapi_module modules/mod_isapi.so
-LoadModule log_config_module modules/mod_log_config.so
-LoadModule mime_module modules/mod_mime.so
-LoadModule negotiation_module modules/mod_negotiation.so
-LoadModule setenvif_module modules/mod_setenvif.so
-LoadModule status_module modules/mod_status.so
-```
-> and i added this at the bottom of the file:
-
-```
-LoadModule php_module "c:/php/php8apache2_4.dll"
-<FilesMatch \.php$>
-    SetHandler application/x-httpd-php
-</FilesMatch>
-# configure the path to php.ini
-PHPIniDir "C:/php"
-
-```
-
-> Edit your php.ini file
-
-```
-enable extensions:
-
-extension=mbstring
-extension=exif     
-extension=mysqli
-extension=pdo_mysql
-
-[Pdo_mysql]
- pdo_mysql.default_socket=
-
-[MBString]
-  mbstring.http_output =
-  mbstring.internal_encoding = UTF-8
-	
-[MySQLi]
- mysqli.default_pw =
- mysqli.default_user =
- mysqli.default_host =
- mysqli.default_socket =
-
-```
-
-#### Debian Linux
+#### Debin Linux
 
 > Install PHP, MariaDB, Apache server  (LAMP stack):
 
@@ -233,28 +142,25 @@ sudo apt install apache2
 sudo apt install mariadb-server
 sudo apt install php libapache2-mod-php php-mysql
 sudo nano /etc/apache2/mods-enabled/dir.conf
-
 ```
-> change the following section to show index.php first
+change the following section to show index.php first
 
-```
-<IfModule mod_dir.c>
+```<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
-
 ```
 
 > Access project root
 
 ``` cd /sourcedir  ```
 
-update the utilities/db_connecttion.php script to match your database installation
+update the utilities/db_connecttion script to match your database installation
 change the owner and group for the utilities directory, and the images directory
 the owner must be set the same as the http server uses (apache2 , nginx, etc...)
 
-> Replace the empty variables for:
-
 ```
+Replace the empty variables for:
+
  	Host
 	DB Name
 	Username

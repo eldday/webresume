@@ -113,17 +113,51 @@ if (isset($_POST['add_category'])) {
     <title>Manage Skills and Categories</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <style>
+        textarea {
+          display: none; /* Hide textarea initially, as it's replaced by CKEditor */
+        }
+
         body {
             display: flex;
             font-family: Arial, sans-serif;
-        }
-        .list {
-            width: 30%;
-            border-right: 1px solid #ccc;
-            padding: 10px;
+            border-right: 4px solid #ccc;
         }
         .details {
-            width: 70%;
+            width: 80%;
+            padding: 20px;
+            margint-right: 20px;
+            margin-left: 20px;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            border-right: 4px solid #ccc;
+            border-left: 4px solid #ccc;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 5px;
+        }
+        .user-list {
+            list-style: none;
+            padding: 5;
+        }
+        .user-list li {
+            margin-bottom: 5px;
+            background-color: rgba(0, 0, 0, 0.059);
+            border: solid #ffffff1f 0.75pt;
+            border-width: 15 15 1px 0; /* Bottom border only */
+            line-height: 1.2;
+            margin-bottom: 5px;
+            padding: 6pt 4pt;
+            text-indent: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .list {
+            width: 25%;
+            border-right: 2px solid #ccc;
+            border-left: 2px solid #ccc;
             padding: 10px;
         }
         ul {
@@ -133,6 +167,10 @@ if (isset($_POST['add_category'])) {
         ul li {
             margin: 5px 0;
         }
+        textarea {
+            display: block; /* Ensure the textarea is visible initially */
+           margin: 10px;
+       }
     </style>
 </head>
 <body>
@@ -153,6 +191,9 @@ if (isset($_POST['add_category'])) {
 <div class="details">
  <hr style="height:3px;border-width:0;color:white;background-color:blue">
 <link rel="stylesheet" href="css/modal-style.css">
+   <?php if ($message): ?>
+        <h2><p style="color:green;background-color: #afcca2;"><?= htmlspecialchars($message); ?></p></h2>
+    <?php endif; ?>
     <h2><?= $selectedSkill ? 'Edit Skill' : 'Add New Skill' ?></h2>
     <form method="POST">
         <?php if ($selectedSkill): ?>
@@ -184,10 +225,6 @@ if (isset($_POST['add_category'])) {
         <input type="text" id="category_name" name="category_name" required>
         <button type="submit" name="add_category">Add Category</button>
     </form>
-
-    <?php if ($message): ?>
-        <p><?= htmlspecialchars($message); ?></p>
-    <?php endif; ?>
 </div>
 //    <script>
  //       ClassicEditor

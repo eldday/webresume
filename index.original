@@ -1,31 +1,27 @@
 <?php
 session_start();
-
-// Admin redirection setting
-define('ADMIN_REDIRECT_ENABLED', true); // Change this to false to disable redirection
-
-// Ensure admin redirection happens only after login verification
-if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['accessLevel'] === 'admin' && basename($_SERVER['PHP_SELF']) !== 'admindex.php') {
-    header("Location: admindex.php"); // Redirect to admin page if logged in as admin
-    exit();
+if (isset($_SESSION['accessLevel'])) {
+//echo json_encode(['success' => true, 'accessLevel' => $_SESSION['accessLevel']]);
 }
-
-// Session timeout check
+// Define session timeout duration (e.g., 30 minutes)
 $timeoutDuration = 1800; // 30 minutes in seconds
+
+// Check if "lastActivity" is set in the session
 if (isset($_SESSION['lastActivity'])) {
+    // Calculate the session's lifetime
     $elapsedTime = time() - $_SESSION['lastActivity'];
+
+    // If the session has expired
     if ($elapsedTime > $timeoutDuration) {
+        // Unset all session variables
         session_unset();
+
+        // Destroy the session
         session_destroy();
+
         exit();
     }
 }
-
-// Set last activity time
-$_SESSION['lastActivity'] = time();
-
-
-
 // Include your database connection script
 require_once 'utilities/db_connection.php';
 
@@ -46,82 +42,104 @@ try {
 
 // Fetch company names
 try {
-    $stmt = $pdo->prepare("SELECT c.company_name, c.company_id, MAX(j.start_date) AS latest_start_date FROM companies c INNER JOIN Job_history j ON c.company_id = j.company_id GROUP BY c.company_name, c.company_id ORDER BY latest_start_date DESC;");
+$stmt = $pdo->prepare("
+    SELECT c.company_name, c.company_id, MAX(j.start_date) AS latest_start_date
+    FROM companies c
+    INNER JOIN Job_history j ON c.company_id = j.company_id
+    GROUP BY c.company_name, c.company_id
+    ORDER BY latest_start_date DESC;
+");
+
+
     $stmt->execute();
     $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error fetching companies: " . $e->getMessage());
 }
-
-// Ensure admin redirection happens only after login verification
-if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['accessLevel'] === 'admin') {
-    header("Location: admindex.php"); // Redirect to admin page if logged in as admin
-    exit();
-}
 ?>
+
 
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Add necessary metadata and styling -->
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo htmlspecialchars($profile['profile_name']); ?></title>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-      /* Custom modal size and styles */
-      .modal-dialog {
-        max-width: 70%;  /* Make modal wider */
-        max-height: 80%;     /* Increase modal height */
-      }
-      .modal-content {
-        height: 90%;   /* Ensure content fills the modal */
-      }
-      .modal-header {
+  /* Custom modal size */
+
+  .modal-dialog {
+    max-width: 70%;  /* Make modal wider */
+    max-height: 80%;     /* Increase modal height */
+        }
+
+  .modal-content {
+    height: 90%;   /* Ensure content fills the modal */
+        }
+
+  .modal-header {
+    background-color: #aed6f1;
+        }
+
+  .modal-title h4 {
+    font-size: 3.0rem;
+          }
+        .modal-header {
         background-color: #aed6f1;
-      }
-      .modal-title h4 {
-        font-size: 3.0rem;
-      }
-      .modal-footer {
+        }
+        .modal-footer {
         background-color: #000;
+        }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
       }
-      /* Tooltip container styling */
-      #tooltip-container {
-        position: absolute;
-        left: 10px;
-        text-align-last: center;
-        vertical-align: top;
-        transform: translateY(-90%);
-        background-color: rgba(0, 0, 0, 0.75);
-        color: white;
-        padding: 4px 6px;
-        border-radius: 6px;
-        display: none;
-        font-size: 18px;
-        white-space: nowrap;
-        pointer-events: none;
-        margin-bottom: 40px;
-        margin-top: 0px;
+      @media (min-width: 1200px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
       }
+     .modal-title h4 {
+        font-size: 3.0rem;
+        }
+
+	#tooltip-container {
+ 	  position: absolute;
+    	  left: 10px; /* Adjust for positioning to the left of buttons */
+	  text-align-last: center;
+	  vertical-align: top;
+   	  transform: translateY(-90%);
+  	  background-color: rgba(0, 0, 0, 0.75);
+   	  color: white;
+  	  padding: 4px 6px;
+  	  border-radius: 6px;
+  	  display: none; /* Initially hidden */
+  	  font-size: 18px;
+  	  white-space: nowrap;
+  	  pointer-events: none;
+  	  margin-bottom: 40px;
+	  margin-top: 0px;
+	}
     </style>
-    <script>
-      // Add necessary JavaScript functions
-      document.addEventListener('DOMContentLoaded', () => {
-          fetch('checkAuth.php', { cache: 'no-store' })
-              .then(response => response.json())
-              .then(result => {
-                  if (result.success) {
-                      sessionStorage.setItem('accessLevel', result.accessLevel);
-                      checkAccessLevel(result.accessLevel);
-                  } else {
-                      sessionStorage.removeItem('accessLevel');
-                      checkAccessLevel('view');
-                  }
-              });
-      });
+  <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('checkAuth.php', { cache: 'no-store' })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        sessionStorage.setItem('accessLevel', result.accessLevel);
+                        checkAccessLevel(result.accessLevel);
+                    } else {
+                        sessionStorage.removeItem('accessLevel');
+                        checkAccessLevel('view');
+                    }
+                });
+        });
 
       function checkAccessLevel(accessLevel) {
         const addUpdateButton = document.querySelector('#addUpdateButton');
@@ -134,6 +152,7 @@ if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['acce
           addUpdateButton.style.display = 'none';
         }
 
+        // Show logout button and hide login button if logged in
         if (accessLevel !== 'view') {
           logoutButton.style.display = 'block';
           loginButton.style.display = 'none';
@@ -143,63 +162,82 @@ if (ADMIN_REDIRECT_ENABLED && isset($_SESSION['accessLevel']) && $_SESSION['acce
         }
       }
 
- // Handle login via AJAX
-async function handleLogin(event) {
-    event.preventDefault(); // Prevent full-page reload
+      // Simulate fetching access level from server (replace with actual server response)
+      document.addEventListener('DOMContentLoaded', () => {
+        const accessLevel = sessionStorage.getItem('accessLevel') || 'view'; // Example: 'admin' or 'view'
+        checkAccessLevel(accessLevel);
+      });
 
-    const username = document.querySelector('#username').value;
-    const password = document.querySelector('#password').value;
+      // Handle login via AJAX
+      async function handleLogin(event) {
+        event.preventDefault(); // Prevent full-page reload
 
-    try {
-        const response = await fetch('authenticate.php', {
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
+
+        try {
+          const response = await fetch('authenticate.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({ username: username, password: password }),
-        });
+          });
 
-        const result = await response.json();
+          const result = await response.json();
 
-        if (result.success) {
+          if (result.success) {
             sessionStorage.setItem('accessLevel', result.accessLevel); // Store access level
             checkAccessLevel(result.accessLevel); // Update UI dynamically
             document.querySelector('#loginModal .btn-close').click(); // Close the modal
-
-            if (result.accessLevel === 'admin') {
-                window.location.href = 'admindex.php'; // Redirect to admin dashboard
-            } else {
-                location.reload(); // Refresh the page for normal users
-            }
-        } else {
+            //alert('Login successful!');
+          } else {
             alert('Login failed: ' + result.message);
+          }
+        } catch (error) {
+          alert('An error occurred: ' + error.message);
         }
-    } catch (error) {
-        alert('An error occurred: ' + error.message);
-    }
-}
-
-
-
-      function handleLogout() {
-        sessionStorage.removeItem('accessLevel');
-        fetch('logout.php', { method: 'POST' })
-            .then(() => {
-                checkAccessLevel('view'); // Update UI to reflect logged-out state
-                alert('Logged out successfully!');
-                location.reload(); // Force reload to ensure fresh session state
-            });
       }
 
-      document.querySelector('#loginForm').addEventListener('submit', handleLogin);
-    </script>
+function handleLogout() {
+    sessionStorage.removeItem('accessLevel');
+    fetch('logout.php', { method: 'POST' })
+        .then(() => {
+            checkAccessLevel('view'); // Update UI to reflect logged-out state
+            alert('Logged out successfully!');
+            location.reload(); // Force reload to ensure fresh session state
+        });
+}
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const tooltipContainer = document.getElementById('tooltip-container');
+    const buttons = document.querySelectorAll('.tooltip-button');
+
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', function () {
+        const tooltipText = this.getAttribute('data-tooltip');
+        tooltipContainer.textContent = tooltipText;
+        tooltipContainer.style.display = 'block';
+
+        // Positioning the tooltip relative to the button
+        const rect = this.getBoundingClientRect();
+        tooltipContainer.style.top = `${rect.top + window.scrollY}px`;
+      });
+
+      button.addEventListener('mouseleave', function () {
+        tooltipContainer.style.display = 'none';
+      });
+    });
+  });
+
+</script>
+
   </head>
   <body>
     <main>
-      <!-- Add your navigation, modals, and page content here -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="">
+          <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()">
             <img src="images/DDAYLOGO.gif" height="70"><?php echo htmlspecialchars($profile['profile_name']); ?>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -210,7 +248,7 @@ async function handleLogin(event) {
               <?php if (!empty($companies)): ?>
                 <?php foreach ($companies as $company): ?>
                   <li class="nav-item">
-                    <a class="nav-link" href="byid.php?company_id=<?php echo htmlspecialchars($company['company_id']); ?>" target="nav">
+                    <a class="nav-link" href="byid.php?company_id=<?php echo htmlspecialchars($company['company_id']); ?>" id="<?php echo htmlspecialchars($company['company_name']); ?>" target="nav">
                       <?php echo htmlspecialchars($company['company_name']); ?>
                     </a>
                   </li>
@@ -222,15 +260,17 @@ async function handleLogin(event) {
               <?php endif; ?>
             </ul>
             <button id="addUpdateButton" type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#modal" style="display: none;">Add/Update</button>
-            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
+	    <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginButton">
               <img src="images/gear2.png" height="25" width="25">
             </button>
-            <button type="button" class="btn btn-danger ms-2" id="logoutButton" style="display: none;" onclick="handleLogout()">Logout</button>
+	    <button type="button" class="btn btn-danger ms-2" id="logoutButton" style="display: none;" onclick="handleLogout()">
+              Logout
+            </button>
           </div>
         </div>
       </nav>
 
-   <!-- Existing Modals and Content -->
+      <!-- Existing Modals and Content -->
       <div class="modal fade bd-example-modal-xl" id="modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
@@ -349,8 +389,5 @@ async function handleLogin(event) {
         document.querySelector('#loginForm').addEventListener('submit', handleLogin);
       </script>
      </main>
-  </body>
-</html>
-    </main>
   </body>
 </html>

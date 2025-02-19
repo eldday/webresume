@@ -46,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $access_level = $_POST['access_level'] ?? null;
 
     if (!$username || !$access_level) {
-        $message = '<h2><p style="color: red; background-color:  #dfa8bb; padding: 5px;">Username and Access Level are required.</p></h2>';
+       // $message = "Username and Access Level are required.";
+ $message = '<p style="color: red;background-color: #dfa8bb; padding: 5px;">Username and Access Level are required!</p>';
     } else {
         try {
             if ($id) {
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ':id' => $id
                     ]);
                 }
-                $message = '<h2><p style="color: green; background-color: #afcca2; padding: 5px;">User updated successfully.</p></h2>';
+                $message = '<p style="color: green;background-color: #afcca2;">User Created Successfully!</p>';
             } else {
                 // Create new user
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -80,14 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':password' => $hashedPassword,
                     ':access_level' => $access_level
                 ]);
-                $message = '<h2><p style="color: green; background-color: #afcca2; padding: 5px;">User created successfully!</p></h2>';
+                $message = '<p style="color: green;background-color: #afcca2; padding: 5px;">User Created Successfully!</p>';
             }
 
             // Refresh the user list after update or creation
             $stmt = $pdo->query('SELECT id, username, access_level FROM users');
             $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) { 
-           $message = '<h2><p style="color: red; background-color: #dfa8bb; padding: 5px;">Error: ' . $e->getMessage() . '</p></h2>';
+        } catch (PDOException $e) {
+            $message = "Error: " . $e->getMessage();
         }
     }
 }
@@ -101,10 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>User Management</title>
     <link rel="stylesheet" href="css/modal-style.css">
     <style>
-        textarea {
-          display: none; /* Hide textarea initially, as it's replaced by CKEditor */
-        }
-
         body {
             display: flex;
             font-family: Arial, sans-serif;
@@ -113,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .details {
             width: 80%;
             padding: 20px;
-            margint-right: 20px;
+            margin-right: 20px;
             margin-left: 20px;
         }
         .sidebar {
@@ -121,10 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 20px;
             border-right: 4px solid #ccc;
             border-left: 4px solid #ccc;
-        }
-        .main {
-            flex-grow: 1;
-            padding: 5px;
         }
         .user-list {
             list-style: none;
@@ -136,29 +129,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: solid #ffffff1f 0.75pt;
             border-width: 15 15 1px 0; /* Bottom border only */
             line-height: 1.2;
-            margin-bottom: 5px;
             padding: 6pt 4pt;
             text-indent: 0;
             font-size: 16px;
             color: #333;
         }
-        .list {
-            width: 25%;
-            border-right: 2px solid #ccc;
-            border-left: 2px solid #ccc;
-            padding: 10px;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li {
-            margin: 5px 0;
-        }
         textarea {
-            display: block; /* Ensure the textarea is visible initially */
-           margin: 10px;
-       }
+            display: block; /* Ensure textarea is visible initially */
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -177,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="details">
         <hr style="height:3px;border-width:0;color:white;background-color:blue">
         <?php if (!empty($message)): ?>
-            <div class="message"><?php echo $message; ?></div>
+            <h2><div class="message"><?php echo $message; ?></div></h2>
         <?php endif; ?>
         <h2>User Management</h2>
 
