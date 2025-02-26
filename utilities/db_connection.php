@@ -1,7 +1,7 @@
 <?php
-$dbname = 'webresume';
-$username = 'pday';
-$password = 'quality';
+$dbname = '';
+$username = '';
+$password = '';
 
 try {
     $pdo = new PDO('mysql:dbname=' . $dbname . ';charset=utf8', $username, $password);
