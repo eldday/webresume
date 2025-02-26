@@ -199,7 +199,7 @@ async function handleLogin(event) {
       <!-- Add your navigation, modals, and page content here -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="">
+       <a class="navbar-brand" href="" data-bs-target="refreshsite()" onclick="refreshsite()">
             <img src="images/DDAYLOGO.gif" height="70"><?php echo htmlspecialchars($profile['profile_name']); ?>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

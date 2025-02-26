@@ -112,7 +112,7 @@ if (isset($_POST['add_job'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Jobs and Companies</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="css/modal-style.css">
+    //<link rel="stylesheet" href="css/modal-style.css">
     <style>
 	textarea {
           display: none; /* Hide textarea initially, as it's replaced by CKEditor */

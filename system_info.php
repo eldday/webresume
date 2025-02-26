@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// Deny access if not admin
+if (!isset($_SESSION['accessLevel']) || $_SESSION['accessLevel'] !== 'admin') {
+    http_response_code(403);
+    echo "Access Denied!";
+    exit();
+}
+
 require_once 'utilities/db_connection.php'; // Include database connection
 
 $db_config = [];
