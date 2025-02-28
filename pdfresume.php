@@ -29,7 +29,7 @@ if (isset($_POST['pdf_generator'])) {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
+            background-color: #FFF;
         }
         .container {
             width: 50%;
@@ -37,7 +37,7 @@ if (isset($_POST['pdf_generator'])) {
             padding: 20px;
             background-color: #c3d0d9;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      	    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
         }
         h1 {
             text-align: center;

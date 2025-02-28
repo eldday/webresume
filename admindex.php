@@ -189,6 +189,21 @@ try {
         function updateIframe(src) {
             document.getElementById('nav').src = src;
         }
+
+       function resizeIframe(iframe) {
+        const contentHeight = iframe.contentWindow.document.body.scrollHeight; // Get the content height
+        const viewportHeight = window.innerHeight; // Get the viewport height
+        iframe.style.height = Math.max(contentHeight, viewportHeight) + 'px'; // Use the larger value
+                }
+
+        // Attach event listeners to navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+          link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const iframe = document.getElementById('nav');
+            iframe.src = this.href;
+          });
+        });
     </script>
 </head>
 <body>
@@ -236,6 +251,7 @@ try {
             <a href="#" onclick="updateIframe('companies.php')">> Companies</a>
             <a href="#" onclick="updateIframe('jobs.php')">> Jobs</a>
             <a href="#" onclick="updateIframe('skills.php')">> Skills</a>
+            <a href="#" onclick="updateIframe('job-data.php')">>Career Statistics</a>
             <button id="logoutButtonSidebar" class="btn btn-danger" onclick="handleLogout()">Logout</button>
         </div>
 

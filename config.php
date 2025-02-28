@@ -12,7 +12,7 @@ $message = ""; // Store messages to display
 
 // Connect to MySQL without selecting a database
 try {
-    $pdo = new PDO("mysql:host=localhost;charset=utf8", "pday", "quality");
+    $pdo = new PDO("mysql:host=localhost;charset=utf8", "pday", "1970S3pt3mb3r25!");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch the list of databases
