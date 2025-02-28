@@ -1,10 +1,6 @@
 <?php
 // Database connection details
-$host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
-
+require_once 'utilities/db_connection.php';
 try {
     // Establish database connection
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

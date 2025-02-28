@@ -4,10 +4,7 @@ require_once('vendor/autoload.php');
 use TCPDF;
 
 // Database connection
-$host = 'localhost';
-$dbname = 'resume';
-$username = 'pday';
-$password = 'quality';
+require_once 'utilities/db_connection.php';
 
 // Create a PDO instance
 try {

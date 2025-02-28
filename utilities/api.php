@@ -1,10 +1,6 @@
 <?php
 // Configuration for the database connection
-$host = "$IP";
-$dbname = "resume";
-$username = "pday";
-$password = "quality";
-
+require_once 'utilities/db_connection.php';
 // Set the content type to JSON
 header("Content-Type: application/json");
 
