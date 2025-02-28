@@ -2,19 +2,7 @@
 require('fpdf.php');
 
 // Database connection
-$host = 'localhost';
-$dbname = 'resume';
-$username = 'pday';
-$password = 'quality';
-
-// Create a PDO instance
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Could not connect to the database: " . $e->getMessage());
-}
-
+require_once 'utilities/db_connection.php';
 // Fetch job history
 $query = "SELECT job_title, company_name, start_date, end_date, job_description FROM Job_history ORDER BY company_name, start_date DESC";
 $statement = $pdo->query($query);
