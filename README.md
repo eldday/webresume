@@ -88,12 +88,18 @@ This includes indicating the category the skill should be associated with.
 ## Skills tab in Admin Modal
 ![Skills in Modal](images/example-admin-skills-modal.png)
 
+
+## Career Statistics in new Admin page 
+![Career Statistics](images/example-career-stats.png)
+
 ## PDF Resume in Admin Modal
 **Create a PDF resume**
 Both FPDF and DOMPDF libraries are present; however, only DOMPDF is available from the admin modal. 
 This is because it was easier to retain the HTML formatting of the job description field which looks better than the others.
 
 ![Create PDF Resume](images/example_pdf_resume_admin_modal.png)
+
+
 
 ## Sample PDF Resume output
 The generated PDF resume looks similar to the following:
