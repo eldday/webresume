@@ -12,7 +12,9 @@ A set of PHP scripts that automatically build and present an interactive resume.
 * The right-aligned login button allows one to login and authenticates with account defined in the user-accounts in the database and creates an authenticated session 
 * If the successfully logged in user has an Admin accesslevel, then a new Add/Update button is displayed that allows the user to enter all of their resume details.
 * The configured database connection can be managed through the admin portal, using this mechanism one can change the configured database to one that contains different information this might be useful to have multiple variant databases created that tailor the information to a specific industyry or type of role. As an example you can have one database for individual contributor type roles , and one for leadership type roles, or even different industries altogether. 
-* Once all all information is entered, you can also generate a PDF Resume based on all the information entered in the various tabs of the admin modal.
+* When all employment information is entered, its possible to generate a PDF Resume based on all the information in the database.
+* Statistical information about employment history is also available: total years and months of career, total in years and months at each company, calculates if you held any Leadership positions (Currently uses Keyword "Manager" from job title. If you had any gaps in between jobs its presented as discrete events in your timeline, it also calculates ( in months) total time in gaps 
+
 
 ---
 
