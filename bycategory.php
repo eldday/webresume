@@ -1,17 +1,5 @@
 <?php
-// Configuration for the database connection
-//$host = "$IP";
-//$dbname = "resume";
-//$username = "pday";
-//$password = "quality";
 
-// Connect to the database
-//try {
-//    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-//    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//} catch (PDOException $e) {
-//    die("Database connection failed: " . $e->getMessage());
-//}
 require_once 'utilities/db_connection.php';
 // Fetch category details and Skills if a category ID is provided
 $category_id = $_GET['category_id'] ?? null;
